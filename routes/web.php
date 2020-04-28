@@ -26,22 +26,27 @@ Route::get('/logoutuser', 'UserController@logout');
 
 
 Auth::routes();
-
 Route::prefix('/app')->group(function () {
     Route::resource('/user', 'UserController');
-    Route::resource('/customer', 'Dashboard\CustomerController');
-    Route::resource('/zone', 'Dashboard\ZoneController');
-    Route::resource('/coupon', 'Dashboard\CouponController');
-    Route::resource('/customercoupon', 'Dashboard\CustomerCouponController');
-    Route::resource('/driver', 'Dashboard\DriverController');
-    Route::resource('/vehicletype', 'Dashboard\VehicletypeController');
-    Route::resource('/vehicle', 'Dashboard\VehicleController');
-    Route::resource('/route', 'Dashboard\RouteController');
-    Route::resource('/routecustomer', 'Dashboard\RouteCustomerController');
+    Route::resource('/usertype', 'Dashboard\UserTypeController');
+    Route::resource('/project', 'Dashboard\ProjectController'); 
+    Route::resource('/expensecategory', 'Dashboard\ExpenseCategoryController');
+    Route::resource('/expense', 'Dashboard\ExpenseController');
+    Route::resource('/product', 'Dashboard\ProductController');
+    Route::resource('/excellsheet', 'Dashboard\ExcellSheetController');
     Route::resource('/dashboardoverview', 'Dashboard\DashboardController');
-    Route::resource('/customerzonebranch', 'Dashboard\CustomerZoneBranchController');
-    Route::resource('/customercouponconsume', 'Dashboard\CustomerConsumeCouponController');
-    Route::resource('/salespeople', 'Dashboard\SalesPeopleController');
+    Route::resource('/bde', 'Dashboard\BDEController');
+    Route::resource('/bdm', 'Dashboard\BDMController');
+    Route::resource('/target', 'Dashboard\TargetController');
+    Route::resource('/bussinessdevelopmentexecutive', 'Dashboard\BussinessDevelopmentExecutiveController');
+    Route::resource('/ledgerhead', 'Dashboard\LedgerHeadController');
+    Route::resource('/ledger', 'Dashboard\LedgerController');
+    Route::resource('/customer', 'Dashboard\CustomerController');
+
+
+    Route::resource('/callback', 'Dashboard\CallBackController');  // testing purpose
+    Route::resource('/test', 'TestController');                    // testing purpose
+    Route::resource('/message', 'Dashboard\MessageController');    // testing purpose
 });
 
 
@@ -87,10 +92,11 @@ Route::get('/app/unassignroutecustomer/routecustomer','Dashboard\RouteCustomerCo
 
 
 //setting
-Route::get('/app/profile', 'UserController@profile');
-Route::post('/app/avatar','UserController@avatar');
-Route::post('/app/changepassword', 'UserController@changePass');
 Route::post('/app/updateUser','UserController@updateUser');
+Route::get('/app/profile', 'UserController@profile');
+Route::post('/app/changepassword', 'UserController@changePass');
+Route::post('/app/updatepassword', 'UserController@updatepassword');
+Route::post('/app/avatar','UserController@avatar');
 
 
 //CustomerZonebranch

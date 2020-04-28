@@ -47,7 +47,7 @@
                     <div class="ml-5">
                        <v-tooltip bottom>
                           <template v-slot:activator="{ on }">
-                              <v-btn dark color="red darken-3" v-on="on" @click="editProfile()">Update</v-btn>
+                              <v-btn dark color="accent" v-on="on" @click="editProfile()">Update</v-btn>
                           </template>
                           <span>Update Profile </span>
                         </v-tooltip>
@@ -72,8 +72,8 @@
             <v-card-text>
             </v-card-text>
             <v-card-actions>
-              <v-btn dark color="red darken-3" @click="changePassword()">Password</v-btn> 
-              <v-btn :loading="loading" :disabled="loading" dark color="red-grey" @click="$refs.inputUpload.click()">
+              <v-btn dark color="indigo  darken-3" @click="changePassword()">Password</v-btn> 
+              <v-btn :loading="loading" :disabled="loading" dark color="blue-grey" @click="$refs.inputUpload.click()">
                     Image<v-icon right >add_a_photo</v-icon>
                   </v-btn>
                   <input
@@ -121,7 +121,6 @@
                     :rules="[
                     v => v == password.newPassword || 'Should be same as new password']"
                     label="Confirm Password*"
-                    
                     required
                     filled
                   ></v-text-field>
@@ -189,7 +188,7 @@ export default {
   }),
   watch: {},
   created() {
-   
+    
     this.initialize();
   },
   methods: {

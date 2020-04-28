@@ -3,7 +3,7 @@
     <v-navigation-drawer
       v-model="trigger"
       :clipped="$vuetify.breakpoint.lgAndUp"
-      color="cyan"
+      color="accent"
       dark
       app
     >
@@ -24,7 +24,7 @@
             :prepend-icon="item.model ? item.icon : item['icon-alt']"
             append-icon
             v-show="handleGoToMenus(item)"
-            active-class="cyan darken-4 white--text"
+            active-class="black white--text"
           >
             <template v-slot:activator>
               <v-list-item  >
@@ -38,7 +38,7 @@
               :key="i"
               :to="handleGoToMenu('/dashboard/'+child.link)"
                v-show="showChild(child)"
-              active-class="cyan accent-3  white--text"
+              active-class="deep-purple white--text"
             >
             <v-flex>
               <v-list-item-action v-if="child.icon">
@@ -76,106 +76,64 @@ export default {
   },
   data: () => ({
     drawer: null,
-    user_type_id:null,
+    userType:null,
     items: [
       {
         icon: "keyboard_arrow_down",
         "icon-alt": "dashboard",
         text: "Dashboard",
         model: false,
-       parentAllowed:[1],
+        parentAllowed:[1,2,3,4,5,6],
         children: [
-          { text: "Overview", link: "" , allowed:[1]},
+          { text: "Overview", link: "" , allowed:[1,2,3,4,5,6]},
           ]
       },
        {
         icon: "keyboard_arrow_down",
         "icon-alt": "face",
-        text: "Customer Managment",
+        text: "Manage User",
+        model: false,
+        parentAllowed:[1,2,3],
+        children: [
+          { text: "User List", link: "user/list" , allowed:[1,2] },
+          { text: "User Password", link: "user/password" , allowed:[1,2]},
+        ]
+      },
+      {
+        icon: "keyboard_arrow_down",
+        "icon-alt": "done_all",
+        text: "Production Overview",
         model: false,
         parentAllowed:[1],
         children: [
-          { text: "Customer List", link: "customer/list" ,allowed:[1]},
+          { text: "Closed", link: "deal/closed" , allowed:[1]},
+          { text: "Follow Up", link: "deal/followup" , allowed:[1]},
+          { text: "Not Intrested", link: "deal/notintrested" , allowed:[1]},
+          { text: "Cancel (Revoked)", link: "deal/cancel" , allowed:[1]},
         ]
       },
       {
         icon: "keyboard_arrow_down",
-        "icon-alt": "face",
-        text: "Sales People Managment",
+        "icon-alt": "home_work",
+        text: "CheckList OR Create",
         model: false,
         parentAllowed:[1],
         children: [
-          { text: "Sales People List", link: "sales/list" ,allowed:[1]},
-        ]
-      },
-      {
-        icon: "keyboard_arrow_down",
-        "icon-alt": "local_shipping",
-        text: "Driver Managment",
-        model: false,
-       parentAllowed:[1],
-        children: [
-          { text: "Driver List", link: "driver/list" ,allowed:[1]},
-        ]
-      },
-      {
-        icon: "keyboard_arrow_down",
-        "icon-alt": "local_shipping",
-        text: "Vehicle Managment",
-        model: false,
-      parentAllowed:[1],
-        children: [
-          { text: "Vehicle Type", link: "vehicle/type" ,allowed:[1]},
-          { text: "Vehicle List", link: "vehicle/list" ,allowed:[1]},
+          { text: "Project List", link: "project/list" , allowed:[1]},
+          { text: "Project Add", link: "project/add" , allowed:[1]},
         ]
       },
        
        {
         icon: "keyboard_arrow_down",
-        "icon-alt": "note",
-        text: "Coupon Managment",
+        "icon-alt": "attach_money",
+        text: "Sacn Or AddDocument",
         model: false,
-      parentAllowed:[1],
+        parentAllowed:[1,5],
         children: [
-          { text: "Coupon Type", link: "coupon/type" ,allowed:[1]},
-          { text: "Customer Coupon List", link: "coupon/customercouponlist" ,allowed:[1]},
-          { text: "Customer Consume Coupon ", link: "coupon/customerconsumecouponlist" ,allowed:[1]},
-        ]
-      },
-       {
-        icon: "keyboard_arrow_down",
-        "icon-alt": "my_location",
-        text: "Zone Managment",
-        model: false,
-        parentAllowed:[1],
-        children: [
-          { text: "Zone List", link: "zone/list" ,allowed:[1]},
-          { text: "Customer zone List", link: "zone/customerzonelist" ,allowed:[1]},
-          
-        ]
-      },
-      {
-        icon: "keyboard_arrow_down",
-        "icon-alt": "gesture",
-        text: "Route Managment",
-        model: false,
-       parentAllowed:[1],
-        children: [
-          { text: "Route List", link: "route/list" ,allowed:[1]},
-          { text: "Remainig Customer/Branches", link: "route/remainigcustomerlist" ,allowed:[1]},
-        ]
-      },
-      {
-        icon: "keyboard_arrow_down",
-        "icon-alt": "settings_applications",
-        text: "Reports",
-        model: false,
-        parentAllowed:[1],
-        children: [
-          { text: "Route", link: "report/routelist" , allowed:[1]},
-          { text: "Customer", link: "report/customerlist" , allowed:[1]},
-          { text: "Delivery", link: "report/deliverylist" , allowed:[1]},
-          { text: "Sale", link: "report/salelist" , allowed:[1]},
+          { text: "Ledger Head", link: "ledger/head" , allowed:[1,5] },  
+          { text: "Ledger List", link: "ledger/list" , allowed:[1,5] },  
+           { text: "Sale Closed List ", link: "ledger/saleclosedlist" , allowed:[1,5] },
         ]
       },
       {
@@ -183,11 +141,12 @@ export default {
         "icon-alt": "settings_applications",
         text: "Setting",
         model: false,
-        parentAllowed:[1],
+        parentAllowed:[1,2,3,4,5,6],
         children: [
-          { text: "Profile", link: "profile" , allowed:[1]},
+          { text: "Profile", link: "profile" , allowed:[1,2,3,4,5,6]},
         ]
       },
+
     ]
   }),
   methods: {
@@ -197,7 +156,7 @@ export default {
     handleGoToMenus(item) {
       for( let d of item.parentAllowed)
       {
-        if(d==this.user_type_id)
+        if(d==this.userType)
         return d
       }
         return false;
@@ -205,7 +164,7 @@ export default {
     showChild(child) {
       for( let d of child.allowed)
       {
-        if(d==this.user_type_id)
+        if(d==this.userType)
         return true
       }
       return false;
@@ -213,7 +172,7 @@ export default {
 
   },
     created() {
-    this.user_type_id = this.$store.state.authUser.user_type_id
+    this.userType = this.$store.state.authUser.userType
   },
 };
 </script>
