@@ -151,7 +151,7 @@ font-weight: 200;
                                     ></v-time-picker>
                                 </v-menu>
                             </v-col>
-                            <v-col cols="12" sm="6" md="6">
+                            <v-col cols="12" sm="6" md="6" v-if="editedItem.target_type != 'daily' ">
                                  <v-menu
                                      ref="menu4"
                                     v-model="menu4"
@@ -205,7 +205,7 @@ font-weight: 200;
                                     <v-date-picker v-model="editedItem.start_date" @input="menu3 = false"></v-date-picker>
                                 </v-menu>
                             </v-col>
-							<v-col cols="12" sm="6" md="6">
+							<v-col cols="12" sm="6" md="6" v-if="editedItem.target_type != 'daily' ">
                                 <v-menu
                                     v-model="menu1"
                                     :close-on-content-click="false"
@@ -227,7 +227,7 @@ font-weight: 200;
                                     <v-date-picker v-model="editedItem.end_date" @input="menu1 = false"></v-date-picker>
                                 </v-menu>
                             </v-col>
-                              <v-col cols="12" sm="6" md="12">
+                              <v-col cols="12" sm="6" md="12" >
                                   <v-text-field label="Remark"  
                                    v-model="editedItem.remark"
                                    filled
@@ -474,9 +474,9 @@ export default {
 						params: this.filters
 						});
 						this.dataList = data.data;
-						this.itemsPerPage=data.per_page;
-						this.pageCount=data.last_page;
-						this.filters.page=data.current_page
+						this.itemsPerPage=per_page;
+						this.pageCount=last_page;
+						this.filters.page=current_page
 						this.loading=false;  
 						            
 					} 
