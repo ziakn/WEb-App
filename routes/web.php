@@ -30,6 +30,9 @@ Route::prefix('/app')->group(function () {
     Route::resource('/user', 'UserController');
     Route::resource('/document', 'Dashboard\DocumentController');
     Route::resource('/machine', 'Dashboard\MachineController');
+    Route::resource('/task', 'Dashboard\TaskController');
+    Route::resource('/taskdetail', 'Dashboard\TaskDetailController');
+
     Route::resource('/usertype', 'Dashboard\UserTypeController');
     Route::resource('/project', 'Dashboard\ProjectController'); 
     Route::resource('/expensecategory', 'Dashboard\ExpenseCategoryController');
@@ -37,23 +40,19 @@ Route::prefix('/app')->group(function () {
     Route::resource('/product', 'Dashboard\ProductController');
     Route::resource('/excellsheet', 'Dashboard\ExcellSheetController');
     Route::resource('/dashboardoverview', 'Dashboard\DashboardController');
-    Route::resource('/bde', 'Dashboard\BDEController');
-    Route::resource('/bdm', 'Dashboard\BDMController');
-    Route::resource('/target', 'Dashboard\TargetController');
-    Route::resource('/bussinessdevelopmentexecutive', 'Dashboard\BussinessDevelopmentExecutiveController');
-    Route::resource('/ledgerhead', 'Dashboard\LedgerHeadController');
-    Route::resource('/ledger', 'Dashboard\LedgerController');
-    Route::resource('/customer', 'Dashboard\CustomerController');
 
 
-    Route::resource('/callback', 'Dashboard\CallBackController');  // testing purpose
-    Route::resource('/test', 'TestController');                    // testing purpose
-    Route::resource('/message', 'Dashboard\MessageController');    // testing purpose
+
 });
 
 
 Route::get('/app/getunsignmachine','Dashboard\MachineController@getunsignmachine');
 Route::get('/app/getunsigadmin','Dashboard\MachineController@getunsigadmin');
+Route::get('/app/getmachinetask/{id}','Dashboard\TaskDetailController@getmachinetask');
+
+
+Route::get('/app/getunsignmachinetask','Dashboard\TaskController@getunsignmachine');
+
 
 
 //Zone 
@@ -128,13 +127,6 @@ Route::post('/app/getcustomerpurchasereport','Dashboard\CustomerConsumeCouponCon
 Route::get('/app/getgeneraldeatilcustomer/{id}','Dashboard\CustomerConsumeCouponController@getCustomerInformation');
 
 
-//Report
-Route::put('/app/routereport/report/{id}','Dashboard\ReportController@getRouteReport');
-Route::put('/app/routecustomerreport/report/{id}','Dashboard\ReportController@getRouteCustomerReport');
-Route::get('/app/customerlist/report/','Dashboard\ReportController@getCustomerList');
-Route::post('/app/customerdeliveryreport/report','Dashboard\ReportController@getCustomerDeleiveryReport');
-Route::post('/app/customerpurchasereport/report','Dashboard\ReportController@getCustomerPurchaseReport');
-Route::post('/app/customeralldeliveryreport/report','Dashboard\ReportController@getAllCustomerDeleiveryReport');
 Route::post('/app/salist/report','Dashboard\ReportController@getSaleList');
 
 Route::get('/app/copy/','Dashboard\RouteController@copy');

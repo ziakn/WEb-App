@@ -120,8 +120,7 @@ export default {
         model: false,
         parentAllowed:[1],
         children: [
-          { text: "Project List", link: "project/list" , allowed:[1]},
-          { text: "Project Add", link: "project/add" , allowed:[1]},
+          { text: "Machine List", link: "task/list" , allowed:[1]},
         ]
       },
        

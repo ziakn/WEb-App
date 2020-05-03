@@ -97,20 +97,12 @@ class MachineController extends Controller
   
     public function destroy($id)
     {
+        // dd($id);
         $response=array();
         $response['status']=false;
-        $response['data']  = AdminMachine::find($id);
-        if($response['data'])
-        {
-           
-                $response['data']=$response['data']->delete();
-                $response['status'] = true;
-           
-        }
-        else
-        {
-            $response['data']="Data Not deleted";  
-        }
+        $response['data']  = AdminMachine::where('machine_id',$id)->delete();
+        $response['status'] = true;
+      
         return response()->json($response);
     }
 

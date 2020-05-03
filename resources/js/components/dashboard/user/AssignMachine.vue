@@ -11,8 +11,6 @@
                   <template v-slot:activator="{ on }">
                      <v-btn color="primary" dark class="mb-2" v-on="on" @click="edit=true">Assign Machine</v-btn>
                   </template>
-             
-             
               <v-card>
                 <v-card-title>
                   <span class="headline">{{ formTitle }}</span>
@@ -154,13 +152,7 @@ export default {
   },
   methods: {
     async initialize() {
-      try {
-        let { data } = await axios({
-          method: "get",
-          url: "/app/getunsignmachine"
-        });
-        this.dataMachine = data;
-      } catch (e) {}
+      
       try {
         let { data } = await axios({
           method: "get",
@@ -168,11 +160,23 @@ export default {
         });
         this.dataAdmin = data;
       } catch (e) {}
-
+      this.getUnsignMachine();
       this.getAdminMachine();
+
 
     },
 
+    async getUnsignMachine()
+        {
+            try {
+        let { data } = await axios({
+          method: "get",
+          url: "/app/getunsignmachine"
+        });
+        this.dataMachine = data;
+      } catch (e) {}
+
+        },
     async getAdminMachine()
     {
          try {
@@ -186,7 +190,7 @@ export default {
     },
     
     deleteItem(item) {
-    	this.dataIndex = this.dataAdmin.indexOf(item);
+    	this.dataIndex = this.dataList.indexOf(item);
 			this.deleteTitle = "Are you sure you want to delete this item?";
 			this.isDelete = !this.isDelete;
     },
@@ -243,7 +247,8 @@ export default {
             if (data.status) 
             {
             this.snacks('Successfully Done','green')
-            this.dataAdmin.unshift(data.data);
+            this.getAdminMachine();
+             this.getUnsignMachine();
             this.loading=false
             this.close();
             }
@@ -264,7 +269,8 @@ export default {
 				});
 				if (data.status) {
 					this.snacks('Successfully Done','green')
-					this.dataAdmin.splice(this.dataIndex, 1);
+          this.dataList.splice(this.dataIndex, 1);
+          this.getUnsignMachine();
 					this.close();				
 				}
 				else
