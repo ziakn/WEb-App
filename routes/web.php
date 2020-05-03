@@ -28,6 +28,8 @@ Route::get('/logoutuser', 'UserController@logout');
 Auth::routes();
 Route::prefix('/app')->group(function () {
     Route::resource('/user', 'UserController');
+    Route::resource('/document', 'Dashboard\DocumentController');
+    Route::resource('/machine', 'Dashboard\MachineController');
     Route::resource('/usertype', 'Dashboard\UserTypeController');
     Route::resource('/project', 'Dashboard\ProjectController'); 
     Route::resource('/expensecategory', 'Dashboard\ExpenseCategoryController');
@@ -48,6 +50,10 @@ Route::prefix('/app')->group(function () {
     Route::resource('/test', 'TestController');                    // testing purpose
     Route::resource('/message', 'Dashboard\MessageController');    // testing purpose
 });
+
+
+Route::get('/app/getunsignmachine','Dashboard\MachineController@getunsignmachine');
+Route::get('/app/getunsigadmin','Dashboard\MachineController@getunsigadmin');
 
 
 //Zone 

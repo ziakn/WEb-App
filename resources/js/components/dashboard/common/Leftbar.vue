@@ -97,6 +97,7 @@ export default {
         children: [
           { text: "User List", link: "user/list" , allowed:[1,2] },
           { text: "User Password", link: "user/password" , allowed:[1,2]},
+          { text: "Assign Machine", link: "user/assignmachine" , allowed:[1,2]},
         ]
       },
       {
@@ -131,9 +132,7 @@ export default {
         model: false,
         parentAllowed:[1,5],
         children: [
-          { text: "Ledger Head", link: "ledger/head" , allowed:[1,5] },  
-          { text: "Ledger List", link: "ledger/list" , allowed:[1,5] },  
-           { text: "Sale Closed List ", link: "ledger/saleclosedlist" , allowed:[1,5] },
+          { text: "Add Doc", link: "document/add" , allowed:[1,5] },  
         ]
       },
       {

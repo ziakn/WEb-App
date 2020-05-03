@@ -14,11 +14,23 @@ class User extends Authenticatable
         'id','name','password','email','userType','parent_id','image',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
+
+
+
+    public function admin()
+    {
+        return $this->hasMany('App\AdminMachine','machine_id')->with('admin');
+    }
+
+
+
+
+
+
+
+
+
+
     protected $hidden = [
         'password', 'remember_token',
     ];

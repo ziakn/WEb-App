@@ -2,7 +2,6 @@ import Vue from "vue";
 import Router from 'vue-router'
 import dashboard from './components/dashboard/overview/Home.vue'
 import project from './components/dashboard/project/Home.vue'
-import ledger from './components/dashboard/ledger/Home.vue'
 import product from './components/dashboard/product/Home.vue'
 import excellsheet from './components/dashboard/excel/Home.vue'
 import dealtelesale from './components/dashboard/dealtelesale/Home.vue'
@@ -13,12 +12,15 @@ import appoinmentrefer from './components/dashboard/appoinmentfixed/Home.vue'
 import workflow from './components/dashboard/appoinmentfixed/Home.vue'
 import deal from './components/dashboard/deal/Home.vue'
 import user from './components/dashboard/user/Home.vue'
+import document from './components/dashboard/document/Home.vue'
+
 import customerproduct from './components/dashboard/customer/Home.vue'
 import chating from './components/dashboard/chat/Home.vue'
 
 import userlist from './components/dashboard/user/List.vue'
 import usertype from './components/dashboard/user/Type.vue'
 import userpassword from './components/dashboard/user/Password.vue'
+import userassignmachine from './components/dashboard/user/AssignMachine.vue'
 import usertargetbde from './components/dashboard/user/TargetBDE.vue'
 import usertargetbdm from './components/dashboard/user/TargetBDM.vue'
 import usertargetbdelist from './components/dashboard/user/TargetBDEList.vue'
@@ -48,9 +50,7 @@ import dealclosed from './components/dashboard/deal/DealClosed.vue'
 import dealfollowup from './components/dashboard/deal/DealFollowUp.vue'
 import dealnotintrested from './components/dashboard/deal/DealNotIntrested.vue'
 import dealcancel from './components/dashboard/deal/DealCancel.vue'
-import ledgerhead from './components/dashboard/ledger/Head.vue'
-import ledgerlist from './components/dashboard/ledger/List.vue'
-import ledgersaleclosedlist from './components/dashboard/ledger/SaleClosedList.vue'
+import documentadd from './components/dashboard/document/Add.vue'
 import targetbdelist from './components/dashboard/targetbde/List.vue'
 import targetbdmlist from './components/dashboard/targetbdm/List.vue'
 import customerproductlist from './components/dashboard/customer/ProductList.vue'
@@ -123,6 +123,14 @@ export default new Router({
                     component: userpassword,       //for super admin, bdm ,bde
                     meta: {
                         title: 'Password',
+                        type: adminBdeBdmOnly,
+                    }
+                },
+                {
+                    path: 'assignmachine',
+                    component: userassignmachine,       //for super admin, bdm ,bde
+                    meta: {
+                        title: 'Assign',
                         type: adminBdeBdmOnly,
                     }
                 },
@@ -231,37 +239,23 @@ export default new Router({
         
 
         {
-            path: '/dashboard/ledger',
-            component: ledger,
+            path: '/dashboard/document',
+            component: document,
             meta: {
-                title: 'Ledger',
+                title: 'Docuemnt',
                 type: adminAcountantOnly,
             },
             children: [
                 {
-                    path: 'head',
-                    component: ledgerhead,
+                    path: 'add',
+                    component: documentadd,
                     meta: {
-                        title: 'Ledger Head',
+                        title: 'Document',
                         type: adminAcountantOnly,
                     }
                 },
-                {
-                    path: 'list',
-                    component: ledgerlist,
-                    meta: {
-                        title: 'Ledger List',
-                        type: adminAcountantOnly,
-                    }
-                },
-                {
-                    path: 'saleclosedlist',
-                    component: ledgersaleclosedlist,
-                    meta: {
-                        title: 'Ledger Sale Closed List',
-                        type: adminAcountantOnly,
-                    }
-                },
+              
+              
             ]
         },
 
