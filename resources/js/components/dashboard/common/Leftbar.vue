@@ -142,6 +142,7 @@ export default {
         parentAllowed:[1,2,3,4,5,6],
         children: [
           { text: "Profile", link: "profile" , allowed:[1,2,3,4,5,6]},
+          { text: "Permission", link: "permission" , allowed:[1,2,3,4,5,6]},
         ]
       },
 

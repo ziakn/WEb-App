@@ -10,6 +10,7 @@ import userlist from './components/dashboard/user/List.vue'
 import userpassword from './components/dashboard/user/Password.vue'
 import userassignmachine from './components/dashboard/user/AssignMachine.vue'
 import profile from './components/dashboard/profile/Profile.vue'
+import permission from './components/dashboard/profile/Permission.vue'
 import documentadd from './components/dashboard/document/Add.vue'
 
 
@@ -97,7 +98,15 @@ export default new Router({
                  type: allOnly, 
                 }
         },
-      
+        {
+            path: '/dashboard/permission',
+            name: 'Permission',
+            component: permission,
+            meta: {
+                 title: 'Permission',
+                 type: allOnly, 
+                }
+        },
         {
             path: '/dashboard/task',
             component: task,
