@@ -11,6 +11,7 @@ import userpassword from './components/dashboard/user/Password.vue'
 import userassignmachine from './components/dashboard/user/AssignMachine.vue'
 import profile from './components/dashboard/profile/Profile.vue'
 import permission from './components/dashboard/profile/Permission.vue'
+import pages from './components/dashboard/profile/Pages.vue'
 import documentadd from './components/dashboard/document/Add.vue'
 
 
@@ -104,6 +105,15 @@ export default new Router({
             component: permission,
             meta: {
                  title: 'Permission',
+                 type: allOnly, 
+                }
+        },
+        {
+            path: '/dashboard/pageslist/:id',
+            name: 'Pages',
+            component: pages,
+            meta: {
+                 title: 'pages',
                  type: allOnly, 
                 }
         },

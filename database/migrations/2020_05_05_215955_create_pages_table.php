@@ -15,18 +15,12 @@ class CreatePagesTable extends Migration
     {
         Schema::create('pages', function (Blueprint $table) {
             $table->id();
-            $table->string('page');
-            $table->integer('machine_id');
-            $table->string('task_name')->nullable();
-            $table->string('target_type')->nullable();
-            $table->string('start_time')->nullable();
-            $table->string('end_time')->nullable();
-            $table->string('start_date')->nullable();
-            $table->string('end_date')->nullable();
-            $table->string('qunatity_produce')->default('pending');
-            $table->string('qunatity_require')->nullable();
-            $table->string('remark')->nullable();
-            $table->string('status')->default('notcomplete');
+            $table->integer('user_role')->default(0);
+            $table->integer('production_overview')->default(0);
+            $table->integer('manage_user')->default(0);
+            $table->integer('checklist_or_create')->default(0);
+            $table->integer('scan_or_document')->default(0);
+            $table->integer('setting')->default(0);
             $table->timestamps();
         });
     }
