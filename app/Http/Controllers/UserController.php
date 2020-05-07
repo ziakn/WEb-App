@@ -10,6 +10,7 @@ use Auth;
 use Session;
 use Redirect;
 use Image;
+use App\Pages;
 use DB;
 class UserController extends Controller
 {
@@ -76,6 +77,11 @@ class UserController extends Controller
         //     $message->to( $request->email , $request->name )
         //     ->subject('Password for SimplistiQ Login');
         // });
+        Pages::create(
+            [
+                'user_role'=> $user->id,
+            ]
+        );
         $response['data']=User::select('id','name','email','name','userType')
         ->find($user->id);
         DB::commit();

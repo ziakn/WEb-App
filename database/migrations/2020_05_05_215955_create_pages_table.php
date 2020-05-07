@@ -15,7 +15,7 @@ class CreatePagesTable extends Migration
     {
         Schema::create('pages', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_role')->default(0);
+            $table->integer('user_role');
             $table->integer('production_overview')->default(0);
             $table->integer('manage_user')->default(0);
             $table->integer('checklist_or_create')->default(0);

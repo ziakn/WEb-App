@@ -13,5 +13,6 @@ class Pages extends Model
         "scan_or_document",
         "setting",
         "user_role",
+        
     ];
 }

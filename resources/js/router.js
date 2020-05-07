@@ -23,14 +23,6 @@ import dashboardoverview from './components/dashboard/overview/OverView.vue'
 
 
 
-let allOnly=[1,2,3,4,5,6]
-let adminAcountantOnly=[1,5]
-let adminBdeBdmOnly=[1,2,3]
-let adminOnly=[1]
-let bdmOnly=[2]
-let bdeOnly=[3]
-let telesaleOnly=[4]
-let customerOnly=[6]
 
 Vue.use(Router)
 export default new Router({
@@ -41,7 +33,6 @@ export default new Router({
             component: dashboard,
             meta: {
                 title: 'Dashboard',
-                type: allOnly,
             },
             children: [
                 {
@@ -49,7 +40,6 @@ export default new Router({
                     component: dashboardoverview,    // for super admin
                     meta: {
                         title: 'Overview',
-                        type: allOnly,
                     }
                 },
               
@@ -60,7 +50,6 @@ export default new Router({
             component: user,
             meta: {
                 title: 'User',
-                type: adminBdeBdmOnly,
             },
             children: [
                 {
@@ -68,7 +57,6 @@ export default new Router({
                     component: userlist,             //for super admin, bdm, bde
                     meta: {
                         title: 'List',
-                        type: adminBdeBdmOnly,
                     }
                 },
                 {
@@ -76,7 +64,6 @@ export default new Router({
                     component: userpassword,       //for super admin, bdm ,bde
                     meta: {
                         title: 'Password',
-                        type: adminBdeBdmOnly,
                     }
                 },
                 {
@@ -84,8 +71,15 @@ export default new Router({
                     component: userassignmachine,       //for super admin, bdm ,bde
                     meta: {
                         title: 'Assign',
-                        type: adminBdeBdmOnly,
                     }
+                },
+                {
+                    path: 'permission',
+                    name: 'Permission',
+                    component: permission,
+                    meta: {
+                         title: 'Permission',
+                        }
                 },
        
             ]
@@ -96,25 +90,15 @@ export default new Router({
             component: profile,
             meta: {
                  title: 'Profile',
-                 type: allOnly, 
                 }
         },
-        {
-            path: '/dashboard/permission',
-            name: 'Permission',
-            component: permission,
-            meta: {
-                 title: 'Permission',
-                 type: allOnly, 
-                }
-        },
+       
         {
             path: '/dashboard/pageslist/:id',
             name: 'Pages',
             component: pages,
             meta: {
                  title: 'pages',
-                 type: allOnly, 
                 }
         },
         {
@@ -122,7 +106,6 @@ export default new Router({
             component: task,
             meta: {
                 title: 'task',
-                type: adminOnly,
             },
             children: [
                 {
@@ -130,7 +113,6 @@ export default new Router({
                     component: tasklist,
                     meta: {
                         title: 'task list',
-                        type: adminOnly,
                     }
                 },
                 {
@@ -138,7 +120,6 @@ export default new Router({
                     component: taskadd,
                     meta: {
                         title: 'task Add',
-                        type: adminOnly,
                     }
                 },
                 {
@@ -146,7 +127,6 @@ export default new Router({
                     component: taskedit,
                     meta: {
                         title: 'task Edit',
-                        type: adminOnly,
                     }
                 },
                 {
@@ -154,7 +134,6 @@ export default new Router({
                     component: taskdetail,
                     meta: {
                         title: 'task detail',
-                        type: adminOnly,
                     }
                 },
             ]
@@ -166,7 +145,6 @@ export default new Router({
             component: document,
             meta: {
                 title: 'Docuemnt',
-                type: adminAcountantOnly,
             },
             children: [
                 {
@@ -174,7 +152,6 @@ export default new Router({
                     component: documentadd,
                     meta: {
                         title: 'Document',
-                        type: adminAcountantOnly,
                     }
                 },
               

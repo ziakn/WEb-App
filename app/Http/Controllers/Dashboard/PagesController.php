@@ -11,6 +11,7 @@ use App\AdminMachine;
 use App\Task;
 use App\Pages;
 use Mail;
+use App\PageUser;
 use Session;
 use Redirect;
 use DB;
@@ -109,6 +110,14 @@ class PagesController extends Controller
     public function getAdminUser()
     {
         $data = User::where('userType',2)->get();
+        return $data;
+    }
+
+    public function getuserpages($id)
+    {
+        // dd($id);
+        $data = Pages::where('user_role',$id)
+        ->first();
         return $data;
     }
 }

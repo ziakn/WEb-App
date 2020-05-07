@@ -86,7 +86,7 @@ export default {
     dataUser: {},
     editedItem:
     {
-        production_overview: 0,
+      production_overview: 0,
       manage_user: 0,
       checklist_or_create:0,
       scan_or_document: 0,

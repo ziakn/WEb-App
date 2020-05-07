@@ -12,24 +12,24 @@ import vuetify from './plugins/vuetify'
 
 
 
-let userType = window.authUser.userType
-router.beforeEach((to, from, next) => {
+// let userType = window.authUser.userType
+// router.beforeEach((to, from, next) => {
 
-    var flag=0;
-    if(to.meta){
-        let allowed = to.meta.type
-        for(let a of allowed){
-            if(a==userType){                
-                flag=1;
-            }
-        }
-    }
-    if(flag==1)
-    next();
-    else
-    return;
+//     var flag=0;
+//     if(to.meta){
+//         let allowed = to.meta.type
+//         for(let a of allowed){
+//             if(a==userType){                
+//                 flag=1;
+//             }
+//         }
+//     }
+//     if(flag==1)
+//     next();
+//     else
+//     return;
   
-  });
+//   });
 
   router.afterEach((to, from) => {
     Vue.nextTick(() => {

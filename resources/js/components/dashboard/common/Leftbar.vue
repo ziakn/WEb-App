@@ -37,7 +37,7 @@
               v-for="(child, i) in item.children"
               :key="i"
               :to="handleGoToMenu('/dashboard/'+child.link)"
-               v-show="showChild(child)"
+                 v-show="showChild(child)"
               active-class="deep-purple white--text"
             >
             <v-flex>
@@ -77,15 +77,17 @@ export default {
   data: () => ({
     drawer: null,
     userType:null,
+    dataUser:[],
+    i:0,
     items: [
       {
         icon: "keyboard_arrow_down",
         "icon-alt": "dashboard",
-        text: "Dashboard",
+        text: "Production",
         model: false,
-        parentAllowed:[1,2,3,4,5,6],
+         parentAllowed:'',
         children: [
-          { text: "Overview", link: "" , allowed:[1,2,3,4,5,6]},
+          { text: "Overview", link: "" , allowed:[1]},
           ]
       },
        {
@@ -93,24 +95,12 @@ export default {
         "icon-alt": "face",
         text: "Manage User",
         model: false,
-        parentAllowed:[1,2,3],
+        parentAllowed:'',
         children: [
-          { text: "User List", link: "user/list" , allowed:[1,2] },
-          { text: "User Password", link: "user/password" , allowed:[1,2]},
-          { text: "Assign Machine", link: "user/assignmachine" , allowed:[1,2]},
-        ]
-      },
-      {
-        icon: "keyboard_arrow_down",
-        "icon-alt": "done_all",
-        text: "Production Overview",
-        model: false,
-        parentAllowed:[1],
-        children: [
-          { text: "Closed", link: "deal/closed" , allowed:[1]},
-          { text: "Follow Up", link: "deal/followup" , allowed:[1]},
-          { text: "Not Intrested", link: "deal/notintrested" , allowed:[1]},
-          { text: "Cancel (Revoked)", link: "deal/cancel" , allowed:[1]},
+          { text: "User List", link: "user/list" , allowed:[1] },
+          { text: "User Password", link: "user/password" , allowed:[1]},
+          { text: "Assign Machine", link: "user/assignmachine" , allowed:[1]},
+           { text: "Permission", link: "user/permission" , allowed:[1]},
         ]
       },
       {
@@ -118,7 +108,7 @@ export default {
         "icon-alt": "home_work",
         text: "CheckList OR Create",
         model: false,
-        parentAllowed:[1],
+         parentAllowed:'',
         children: [
           { text: "Machine List", link: "task/list" , allowed:[1]},
         ]
@@ -129,9 +119,9 @@ export default {
         "icon-alt": "attach_money",
         text: "Sacn Or AddDocument",
         model: false,
-        parentAllowed:[1,5],
+         parentAllowed:'',
         children: [
-          { text: "Add Doc", link: "document/add" , allowed:[1,5] },  
+          { text: "Add Doc", link: "document/add" , allowed:[1] },  
         ]
       },
       {
@@ -139,28 +129,55 @@ export default {
         "icon-alt": "settings_applications",
         text: "Setting",
         model: false,
-        parentAllowed:[1,2,3,4,5,6],
+         parentAllowed:'',
         children: [
-          { text: "Profile", link: "profile" , allowed:[1,2,3,4,5,6]},
-          { text: "Permission", link: "permission" , allowed:[1,2,3,4,5,6]},
+          { text: "Profile", link: "profile" , allowed:[1]},
+         
         ]
       },
 
     ]
   }),
-  methods: {
-    handleGoToMenu(d) {
+  created() 
+    {
+    this.userType = this.$store.state.authUser.id
+    this.initialize();
+
+    },
+  methods: 
+  {
+
+    async initialize() {
+      try 
+      {
+        let { data } = await axios({
+          method: "get",
+          url: "/app/getuserpages/"+this.userType
+        });
+        this.dataUser = data;
+        this.items[0].parentAllowed=this.dataUser.production_overview
+        this.items[1].parentAllowed=this.dataUser.manage_user
+        this.items[2].parentAllowed=this.dataUser.checklist_or_create
+        this.items[3].parentAllowed=this.dataUser.scan_or_document
+        this.items[4].parentAllowed=this.dataUser.setting
+      } catch (e) {}
+
+    },
+    handleGoToMenu(d) 
+    {
       return d;
     },
-    handleGoToMenus(item) {
-      for( let d of item.parentAllowed)
-      {
-        if(d==this.userType)
-        return d
-      }
+    handleGoToMenus(item) 
+    {
+      
+        if(item.parentAllowed==1)
+        {
+          return true
+        }
         return false;
     },
-    showChild(child) {
+    showChild(child)
+    {
       for( let d of child.allowed)
       {
         if(d==this.userType)
@@ -170,8 +187,7 @@ export default {
     },
 
   },
-    created() {
-    this.userType = this.$store.state.authUser.userType
-  },
+    
+
 };
 </script>
