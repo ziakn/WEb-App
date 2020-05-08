@@ -33,12 +33,6 @@ Route::prefix('/app')->group(function () {
     Route::resource('/task', 'Dashboard\TaskController');
     Route::resource('/taskdetail', 'Dashboard\TaskDetailController');
 
-    Route::resource('/usertype', 'Dashboard\UserTypeController');
-    Route::resource('/project', 'Dashboard\ProjectController'); 
-    Route::resource('/expensecategory', 'Dashboard\ExpenseCategoryController');
-    Route::resource('/expense', 'Dashboard\ExpenseController');
-    Route::resource('/product', 'Dashboard\ProductController');
-    Route::resource('/excellsheet', 'Dashboard\ExcellSheetController');
     Route::resource('/dashboardoverview', 'Dashboard\DashboardController');
     Route::resource('/pages', 'Dashboard\PagesController');
 

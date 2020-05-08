@@ -9,6 +9,7 @@ use Auth;
 use App\User;
 use App\AdminMachine;
 use App\Task;
+use App\TaskDetail;
 use Mail;
 use Session;
 use Redirect;
@@ -18,9 +19,21 @@ class TaskController extends Controller
 {
     public function index(Request $request)
     {
-         // $auth_id=Auth::id();
-         $data=Task::orderBy('id','DESC')
-         ->with('machine');
+         $auth_id=Auth::User();
+         if($auth_id->userType==3)
+         {
+            $data=Task::where('machine_id',$auth_id->id)
+            ->with('machine');
+         }
+         elseif($auth_id->userType==2)
+         {
+            $data=Task::where('admin_id',$auth_id->id)
+            ->with('machine');
+         }
+         elseif($auth_id->userType==1)
+         {
+            $data=Task::with('machine');
+         }
          if(isset($request->show) && !empty($request->show))
          {
              $show=$request->show;
@@ -122,7 +135,7 @@ class TaskController extends Controller
         $response['data']  = Task::find($id);
         if($response['data'])
         {
-           
+                TaskDetail::where('machine_id',$response['data']->machine_id)->delete();
                 $response['data']=$response['data']->delete();
                 $response['status'] = true;
            
@@ -136,8 +149,16 @@ class TaskController extends Controller
 
     public function getunsignmachine()
     {
+        $id = Auth::User();
+        if($id->userType==2)
+        {
+            $admin=AdminMachine::where('admin_id',$id->id)->get();
+        }
+        else
+        {
+            $admin=AdminMachine::get();
+        }
         
-        $admin=AdminMachine::get();
         $machine_id=array();
         foreach($admin as $item)
         {

@@ -109,7 +109,7 @@ class PagesController extends Controller
 
     public function getAdminUser()
     {
-        $data = User::where('userType',2)->get();
+        $data = User::get();
         return $data;
     }
 

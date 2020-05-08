@@ -18,7 +18,16 @@ class DocumentController extends Controller
     public function index(Request $request)
     {
         // $auth_id=Auth::id();
-        $data=Document::orderBy('id','DESC');
+        $id = Auth::User();
+        if($id->userType==2)
+        {
+            $data=Document::where('admin_id',$id->id);
+        }
+        else
+        {
+            $data=Document::orderBy('id','DESC');
+        }
+       
         if(isset($request->show) && !empty($request->show))
         {
             $show=$request->show;

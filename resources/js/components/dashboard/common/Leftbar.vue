@@ -87,7 +87,7 @@ export default {
         model: false,
          parentAllowed:'',
         children: [
-          { text: "Overview", link: "" , allowed:[1]},
+          { text: "Overview", link: "" , },
           ]
       },
        {
@@ -97,10 +97,10 @@ export default {
         model: false,
         parentAllowed:'',
         children: [
-          { text: "User List", link: "user/list" , allowed:[1] },
-          { text: "User Password", link: "user/password" , allowed:[1]},
-          { text: "Assign Machine", link: "user/assignmachine" , allowed:[1]},
-           { text: "Permission", link: "user/permission" , allowed:[1]},
+          { text: "User List", link: "user/list" ,  },
+          { text: "User Password", link: "user/password" , },
+          { text: "Assign Machine", link: "user/assignmachine" , },
+           { text: "Permission", link: "user/permission" , },
         ]
       },
       {
@@ -110,7 +110,7 @@ export default {
         model: false,
          parentAllowed:'',
         children: [
-          { text: "Machine List", link: "task/list" , allowed:[1]},
+          { text: "Machine List", link: "task/list" , },
         ]
       },
        
@@ -121,7 +121,7 @@ export default {
         model: false,
          parentAllowed:'',
         children: [
-          { text: "Add Doc", link: "document/add" , allowed:[1] },  
+          { text: "Add Doc", link: "document/add" ,  },  
         ]
       },
       {
@@ -131,7 +131,7 @@ export default {
         model: false,
          parentAllowed:'',
         children: [
-          { text: "Profile", link: "profile" , allowed:[1]},
+          { text: "Profile", link: "profile" , },
          
         ]
       },
@@ -178,12 +178,9 @@ export default {
     },
     showChild(child)
     {
-      for( let d of child.allowed)
-      {
-        if(d==this.userType)
-        return true
-      }
-      return false;
+      
+        return child
+      
     },
 
   },
