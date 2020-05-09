@@ -11,7 +11,6 @@ import vuetify from './plugins/vuetify'
 
 
 
-
 // let userType = window.authUser.userType
 // router.beforeEach((to, from, next) => {
 
