@@ -1,8 +1,8 @@
 <script>
-import { Line } from "vue-chartjs";
+import { Bar } from "vue-chartjs";
 
 export default {
-  extends: Line,
+  extends: Bar,
    props:
       {
              dataList:Object
@@ -13,9 +13,10 @@ export default {
       gradient: null,
       gradient2: null,
    myData:{},
-      currentyearsum:[],
-      lastyearsum:[],
-      month:[]
+      qunatity_produce:[],
+      start_date:[],
+      machine:[],
+      month:[],
       
     
     };
@@ -26,51 +27,27 @@ export default {
       this.myData=this.dataList;
       if(this.myData)
           {
-          for(let p of this.myData.monthlyincomecurrentyear)
+          for(let p of this.myData.week)
                       {
-                          this.currentyearsum.push(p.sum)
-                          this.month.push(p.month)
-                          
+                            this.qunatity_produce.push(p.qunatity_produce)
+                            this.machine.push(p.machine.name)
                       }
-           for(let p of this.myData.monthlyincomelastyear)
-                      {
-                          this.lastyearsum.push(p.sum)
-                      }
+                       
+         
           };
           this.renderChart(
       {
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "November",
-          "December"
-        ],
+        labels:  this.machine,
         datasets: [
+         
           {
-            label: "Income Last year",
-            borderColor: "#FC2525",
-            pointBackgroundColor: "white",
-            borderWidth: 1,
-            pointBorderColor: "white",
-            backgroundColor: this.gradient,
-            data:this.lastyearsum
-          },
-          {
-            label: "Income current year",
+            label: "Last 7 Days",
             borderColor: "#05CBE1",
             pointBackgroundColor: "white",
             pointBorderColor: "white",
             borderWidth: 1,
             backgroundColor: this.gradient2,
-            data: this.currentyearsum
+            data: this.qunatity_produce
           }
         ]
       },
@@ -96,6 +73,7 @@ export default {
     this.gradient2.addColorStop(1, "rgba(0, 231, 255, 0)");
 
       
+      
         
     
       
@@ -111,15 +89,7 @@ export default {
 
   method:
   {
-       monthlyincomecurrentyear()
-       {
-         
-         
-       },
-       monthlyincomelastyear()
-       {
-
-       },
+       
        
   }
 };

@@ -407,8 +407,8 @@ export default {
 				],
 				dataTarget:[
 					{text:'Daily', value:'daily'},
-					{text:'Weekly', value:'monthly'},
-					{text:'Monthly', value:'weekly'},
+					{text:'Weekly', value:'weekly'},
+					{text:'Monthly', value:'monthly'},
 				]
 				
 	}),

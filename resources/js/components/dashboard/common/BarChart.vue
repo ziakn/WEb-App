@@ -25,30 +25,24 @@ export default {
     dataList() {
 
       this.myData=this.dataList;
-      console.log(this.myData.days['04'])
-      let i=0;
       if(this.myData)
           {
-          for(let p of this.myData.days['04'])
+          for(let p of this.myData.daily)
                       {
                             this.qunatity_produce.push(p.qunatity_produce)
-                            this.start_date.push(p.start_date)
+                            this.start_date=p.start_date
                             this.machine.push(p.machine.name)
                       }
-                       for(let p of this.myData.days['20'])
-                      {
-                            this.qunatity_produce.push(p.qunatity_produce)
-                            this.start_date.push(p.start_date)
-                      }
+                       
          
           };
           this.renderChart(
       {
-        labels:  this.start_date,
+        labels:  this.machine,
         datasets: [
          
           {
-            label: this.machine,
+            label: "Today",
             borderColor: "#05CBE1",
             pointBackgroundColor: "white",
             pointBorderColor: "white",

@@ -28,6 +28,7 @@ class DashboardController extends Controller
     public function index()
     {
         $response=array();
+        $today = Carbon::now()->format('Y-m-d');
         $response['admin'] = User::where('userType',2)->count();
         $response['machine'] = User::where('userType',3)->count();
 
@@ -39,17 +40,17 @@ class DashboardController extends Controller
             }  
         $response['daily']=TaskDetail::wherein('machine_id', $machine_id)
         ->where('target_type', 'daily')
-        ->whereMonth('start_date', date('m'))
-        ->whereYear('start_date', date('Y'))
-        ->get(['qunatity_produce','machine_id','start_date']);
+        ->where('start_date', $today)
+        ->with('machine')
+        ->get();
 
-        $response['days'] = TaskDetail::whereBetween('start_date', [now()->startOfMonth(), now()->endOfMonth()])
-            ->orderBy('start_date')
+        $week = Carbon::now()->subDays(7)->format('Y-m-d');
+        $response['week'] = TaskDetail::where('target_type', 'weekly')
+            ->where('start_date','>=', $week)
             ->with('machine')
-            ->get()
-            ->groupBy(function ($val) {
-                return Carbon::parse($val->start_date)->format('d');
-            });
+            ->get();
+
+            
 
             // dd($response['daily']);
         return $response;

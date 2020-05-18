@@ -41,38 +41,25 @@
 									<BarChart :dataList="dataList" />				
 								</v-card>
 						</v-flex>
-						<!-- <v-flex xs12 sm12 md6 lg6 pa-2>
-								<v-card flat class="elevation-8">
-									<AreaChart :dataList="dataList" />			
-								</v-card>
-						</v-flex> -->
-						
-					</v-row>
-<v-row>
-					<v-flex xs12 sm12 md12 lg12 pa-2>
+						<v-flex xs12 sm12 md6 lg6 pa-2>
 							<v-card flat class="elevation-8">
-								<v-card-title>
-									<h3>Customer By Zone</h3>
-								</v-card-title>
-								<v-card-text>
-								    <PieChart :height="800" :dataList="dataList" />
-								</v-card-text>
+									<BarChart2 :dataList="dataList" />				
 								</v-card>
 						</v-flex>
-				</v-row>
+						
+					</v-row>
+
 				
              </div>
 </template>
 <script>
-import AreaChart from "./AreaChart.vue";
 import BarChart from "./BarChart.vue";
-import PieChart from "./PieChart.vue";
+import BarChart2 from "./BarChart2.vue";
 export default {
 	components: 
 	{
-		AreaChart,
+		BarChart2,
 		BarChart,
-		PieChart,
 	},
     props:{
             dataList:{},
