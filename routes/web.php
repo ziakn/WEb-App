@@ -49,8 +49,10 @@ Route::get('/app/getmachinetask/{id}','Dashboard\TaskDetailController@getmachine
 Route::get('/app/getunsignmachinetask','Dashboard\TaskController@getunsignmachine');
 
 Route::get('/app/useradmin','Dashboard\PagesController@getAdminUser');
+
 Route::get('/app/getuserpages/{id}','Dashboard\PagesController@getuserpages');
 
+Route::get('/app/getusertype/{id}','Dashboard\PagesController@getuserType');
 
 
 

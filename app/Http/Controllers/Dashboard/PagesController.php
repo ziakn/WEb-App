@@ -120,4 +120,12 @@ class PagesController extends Controller
         ->first();
         return $data;
     }
+
+    public function getuserType($id)
+    {
+        // dd($id);
+        $data = User::find($id);
+        return $data;
+    }
+
 }

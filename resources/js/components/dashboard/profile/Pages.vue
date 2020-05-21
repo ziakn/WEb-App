@@ -23,8 +23,8 @@
                          <td> <v-checkbox v-model="editedItem.production_overview" ></v-checkbox></td>
                         </tr>
                         <tr>
-                        <td>manage_user</td>
-                        <td> <v-checkbox v-model="editedItem.manage_user"  ></v-checkbox></td>
+                        <td >manage_user</td>
+                        <td> <v-checkbox v-model="editedItem.manage_user" v-if="dataType.userType != 3 && dataType.userType != 2" ></v-checkbox></td>
                         </tr>
                         <tr>
                         <td>checklist_or_create</td>
@@ -32,7 +32,7 @@
                         </tr>
                         <tr>
                         <td>scan_or_document </td>
-                        <td> <v-checkbox v-model="editedItem.scan_or_document"  ></v-checkbox></td>
+                        <td> <v-checkbox v-model="editedItem.scan_or_document"  v-if="dataType.userType != 3"></v-checkbox></td>
                         </tr>
                         <tr>
                         <td>setting</td>
@@ -84,6 +84,7 @@ export default {
     timeout: 6000,
     text: "Hello, I'm a snackbar",
     dataUser: {},
+    dataType:{},
     editedItem:
     {
       production_overview: 0,
@@ -115,19 +116,25 @@ export default {
         });
         this.dataUser = data;
         this.editedItem.production_overview= this.dataUser.production_overview
-      this.editedItem.manage_user= this.dataUser.manage_user
-      this.editedItem.checklist_or_create= this.dataUser.checklist_or_create
-      this.editedItem.scan_or_document= this.dataUser.scan_or_document
-      this.editedItem.setting= this.dataUser.setting
-      this.editedItem.user_role= this.dataUser.user_role
+        this.editedItem.manage_user= this.dataUser.manage_user
+        this.editedItem.checklist_or_create= this.dataUser.checklist_or_create
+        this.editedItem.scan_or_document= this.dataUser.scan_or_document
+        this.editedItem.setting= this.dataUser.setting
+        this.editedItem.user_role= this.dataUser.user_role
       } catch (e) {}
+
+        try {
+        let { data } = await axios({
+          method: "get",
+          url: "/app/getusertype/"+this.$route.params.id
+        });
+        this.dataType = data;
+      } catch (e) {
+      }
 
     },
     
-   detailItem(item)
-        {
-            this.$router.push('/dashboard/pageslist/'+item.id);
-        },
+   
     close() {
       this.dialog = false;
       setTimeout(() => {
