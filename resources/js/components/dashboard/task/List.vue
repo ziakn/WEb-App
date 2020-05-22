@@ -37,13 +37,13 @@
                                         </v-tooltip>
                                         <v-tooltip bottom>
                                             <template v-slot:activator="{ on }">
-                                              <v-icon small @click="editItem(item)" v-on="on">edit</v-icon>
+                                              <v-icon small @click="editItem(item)" v-on="on" >edit</v-icon>
                                             </template>
                                             <span>Edit </span>
                                         </v-tooltip>
                                             <v-tooltip bottom>
                                             <template v-slot:activator="{ on }">
-                                              <v-icon small @click="deleteItem(item)" v-on="on">delete</v-icon>
+                                              <v-icon small @click="deleteItem(item)" v-on="on" :disabled="userType==3" >delete</v-icon>
                                             </template>
                                             <span>Delete</span>
                                         </v-tooltip>
@@ -148,7 +148,7 @@
 	</v-container>
         <v-tooltip top>
             <template v-slot:activator="{ on }">
-               <v-btn bottom color="primary" dark fab fixed right @click="dialog = !dialog">
+               <v-btn bottom color="primary" dark fab fixed right @click="dialog = !dialog" :disabled="userType==3" >
 			    <v-icon v-on="on">mdi-plus</v-icon>
 		        </v-btn>
             </template>
@@ -168,7 +168,8 @@ export default {
 		source: String
 	},
 	data: () => ({
-		dataIndex: null,
+        dataIndex: null,
+        userType:null,
 		deleteTitle: "",
 		deleteBody: "",
         isDelete: false,
@@ -224,6 +225,7 @@ computed: {
 		}
 	},
 	created() {
+        this.userType = this.$store.state.authUser.userType
 		this.initialize();
 	},
 	methods: {

@@ -10,7 +10,7 @@
            
             <v-dialog v-model="dialog" max-width="500px">
                   <template v-slot:activator="{ on }">
-                     <v-btn color="primary" dark class="mb-2" v-on="on" @click="edit=true">New Document</v-btn>
+                     <v-btn color="primary" dark class="mb-2" v-on="on" @click="edit=true" :disabled="userType==3">New Document</v-btn>
                   </template>
              
              
@@ -104,13 +104,13 @@
                  <v-btn x-small color="primary" :href="item.file_src" download v-if="item.file_src">download link</v-btn>
                 <v-tooltip bottom  >
                       <template v-slot:activator="{ on }">
-                      <v-icon small @click="editItem(item)" v-on="on">edit</v-icon>
+                      <v-icon small @click="editItem(item)" v-on="on" :disabled="userType==3" >edit</v-icon>
                       </template>
                       <span>Edit </span>
                 </v-tooltip>
                 <v-tooltip bottom >
                       <template v-slot:activator="{ on }">
-                      <v-icon small @click="deleteItem(item)" v-on="on">delete</v-icon>
+                      <v-icon small @click="deleteItem(item)" v-on="on" :disabled="userType==3">delete</v-icon>
                       </template>
                       <span>Delete</span>
                 </v-tooltip>
@@ -157,7 +157,7 @@ export default {
 		DeleteModal
 	},
   data: () => ({
-   
+   userType:null,
 		loading:false,
     snackbar: false,
        dataIndex: null,
@@ -210,6 +210,7 @@ export default {
   },
   watch: {},
   created() {
+    this.userType = this.$store.state.authUser.userType
     this.initialize();
   },
   methods: {

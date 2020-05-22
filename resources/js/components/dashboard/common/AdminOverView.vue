@@ -48,6 +48,67 @@
 						</v-flex>
 						
 					</v-row>
+					  <v-row justify="center" >
+				<v-flex xs12 sm12 md6 lg6 pa-2>
+						<v-card flat class="elevation-8" >
+								<v-card-title>
+									<h4>Recent Admin Created</h4>
+								</v-card-title>
+								<v-card-text>
+									<v-simple-table  >
+										<template v-slot:default>
+										<thead color="purple darken-4" dark>
+											<tr>
+											<th class="text-left">Name</th>
+											<th class="text-left">Email</th>
+											<th class="text-left">Type</th>
+											<th class="text-left">Date</th>
+											
+											</tr>
+										</thead>
+										<tbody>
+											<tr v-for="(item, index) in dataList.newAdmin" :key="index">
+											<td>{{ item.name }}</td>
+											<td>{{ item.email }}</td>
+											<td>Admin</td>
+											<td>{{ item.created_at }}</td>
+											</tr>
+										</tbody>
+										</template>
+									</v-simple-table>
+									</v-card-text>
+								</v-card>
+					</v-flex>
+					<v-flex xs12 sm12 md6 lg6 pa-2>
+							<v-card flat class="elevation-8">
+								<v-card-title>
+									<h4>Recent Machine Created</h4>
+								</v-card-title>
+								<v-card-text>
+									<v-simple-table color="accent" >
+										<template v-slot:default>
+										<thead>
+											<tr>
+											<th class="text-left"> Name</th>
+											<th class="text-left">Email</th>
+											<th class="text-left">Type</th>
+											<th class="text-left">Date</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr v-for="(item, index) in dataList.newMachine" :key="index">
+											<td>{{ item.name }}</td>
+											<td>{{ item.email }}</td>
+											<td>Machine</td>
+											<td>{{ item.created_at }}</td>
+											</tr>
+										</tbody>
+										</template>
+									</v-simple-table>
+									</v-card-text>
+							</v-card>
+					</v-flex>
+					</v-row>
 
 				
              </div>

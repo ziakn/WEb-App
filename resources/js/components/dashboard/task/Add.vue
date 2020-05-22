@@ -172,6 +172,7 @@ export default {
 	},
 	data: () => ({
 			valid: false,
+			 userType:null,
 		formValue:
 		{
 			customer_id:'',
@@ -203,6 +204,7 @@ export default {
 	},
 	watch: {},
 	created() {
+		 this.userType = this.$store.state.authUser.userType
 		this.initialize();
 	},
 	methods: {

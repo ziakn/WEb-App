@@ -31,29 +31,30 @@ class DashboardController extends Controller
         $user = Auth::user();
         if($user->userType==1)
         {
+                $today = Carbon::now()->format('Y-m-d');
+                $response['admin'] = User::where('userType',2)->count();
+                $response['machine'] = User::where('userType',3)->count();
 
-        
-        $today = Carbon::now()->format('Y-m-d');
-        $response['admin'] = User::where('userType',2)->count();
-        $response['machine'] = User::where('userType',3)->count();
+                $machine=User::where('userType',3)->get(); 
+                    $machine_id=array();
+                    foreach($machine as $item)
+                    {
+                        array_push($machine_id,$item['id']);
+                    }  
+                $response['daily']=TaskDetail::wherein('machine_id', $machine_id)
+                ->where('target_type', 'daily')
+                ->where('start_date', $today)
+                ->with('machine')
+                ->get();
 
-        $machine=User::where('userType',3)->get(); 
-            $machine_id=array();
-            foreach($machine as $item)
-            {
-                array_push($machine_id,$item['id']);
-            }  
-        $response['daily']=TaskDetail::wherein('machine_id', $machine_id)
-        ->where('target_type', 'daily')
-        ->where('start_date', $today)
-        ->with('machine')
-        ->get();
+                $week = Carbon::now()->subDays(7)->format('Y-m-d');
+                $response['week'] = TaskDetail::where('target_type', 'weekly')
+                    ->where('start_date','>=', $week)
+                    ->with('machine')
+                    ->get();
 
-        $week = Carbon::now()->subDays(7)->format('Y-m-d');
-        $response['week'] = TaskDetail::where('target_type', 'weekly')
-            ->where('start_date','>=', $week)
-            ->with('machine')
-            ->get();
+                    $response['newAdmin'] = User::orderBy('id','DESC')->where('userType',2)->limit(5)->get();
+                    $response['newMachine'] = User::orderBy('id','DESC')->where('userType',3)->limit(5)->get();
         }
 
         elseif($user->userType==2)

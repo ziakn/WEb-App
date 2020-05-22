@@ -116,6 +116,7 @@ font-weight: 200;
                             <v-col cols="12" sm="6" md="6">
                                  <v-text-field label="Qty Require"
                                   v-model="editedItem.qunatity_require"
+								   :disabled="userType==3"
                                   filled
                                  ></v-text-field>
                             </v-col>
@@ -330,6 +331,7 @@ export default {
 	data: () => ({
 				valid: false,
 				absolute: true,
+       			 userType:null,
 				menu1:false,
 				menu3:false,
 				menu4:false,
@@ -437,6 +439,7 @@ export default {
 
 	created()
 	 {
+		 this.userType = this.$store.state.authUser.userType
 			this.initialize();
 	 },
 
