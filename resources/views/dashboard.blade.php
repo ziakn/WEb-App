@@ -35,7 +35,9 @@
              @endif
         })();
         </script>
-                
+                <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+                <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+                <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
     </head>
     <body>
         <div id="se-pre-con"></div>
@@ -52,4 +54,7 @@
         
         </script>
     </body>
+    <script src="/js/manifest.js"></script>
+<script src="/js/vendor.js"></script>
+<script src="/js/app.js"></script>
 </html>
