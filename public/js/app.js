@@ -2476,17 +2476,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           text: "Permission",
           link: "user/permission"
         }]
-      }, {
-        icon: "keyboard_arrow_down",
-        "icon-alt": "home_work",
-        text: "CheckList OR Create",
-        model: false,
-        parentAllowed: '',
-        children: [{
-          text: "Machine List",
-          link: "task/list"
-        }]
-      }, {
+      }, // {
+      //   icon: "keyboard_arrow_down",
+      //   "icon-alt": "home_work",
+      //   text: "CheckList OR Create",
+      //   model: false,
+      //    parentAllowed:'',
+      //   children: [
+      //     { text: "Machine List", link: "task/list" , },
+      //   ]
+      // },
+      {
         icon: "keyboard_arrow_down",
         "icon-alt": "attach_money",
         text: "Sacn Or AddDocument",

@@ -24,7 +24,7 @@
     <div class="page-wrapper">
 
         <header class="header">
-            <a href="" class="logo">Muchin </a>
+            <a href="#" class="logo">Mushin </a>
             <input class="menu-btn" type="checkbox" id="menu-btn" />
             <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
            
