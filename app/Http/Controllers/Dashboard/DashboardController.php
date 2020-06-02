@@ -31,7 +31,7 @@ class DashboardController extends Controller
         $user = Auth::user();
         if($user->userType==1)
         {
-                $today = Carbon::now()->format('Y-m-d');
+                $today = Carbon::now()->subDays(30)->format('Y-m-d');
                 $response['admin'] = User::where('userType',2)->count();
                 $response['machine'] = User::where('userType',3)->count();
 
@@ -43,25 +43,23 @@ class DashboardController extends Controller
                     }  
                 $response['daily']=TaskDetail::wherein('machine_id', $machine_id)
                 ->where('target_type', 'daily')
-                ->where('start_date', $today)
+                ->where('start_date','>', Carbon::now()->subDays(30)->format('Y-m-d'))
                 ->with('machine')
                 ->get();
 
                 $week = Carbon::now()->subDays(7)->format('Y-m-d');
                 $response['week'] = TaskDetail::where('target_type', 'weekly')
-                    ->where('start_date','>=', $week)
-                    ->with('machine')
-                    ->get();
+                ->where('start_date','>=', $week)
+                ->with('machine')
+                ->get();
 
-                    $response['newAdmin'] = User::orderBy('id','DESC')->where('userType',2)->limit(5)->get();
-                    $response['newMachine'] = User::orderBy('id','DESC')->where('userType',3)->limit(5)->get();
+                $response['newAdmin'] = User::orderBy('id','DESC')->where('userType',2)->limit(5)->get();
+                $response['newMachine'] = User::orderBy('id','DESC')->where('userType',3)->limit(5)->get();
         }
 
         elseif($user->userType==2)
         {
             $today = Carbon::now()->format('Y-m-d');
-
-
             $machine=AdminMachine::where('admin_id',$user->id)->get(); 
                 $machine_id=array();
                 foreach($machine as $item)
@@ -70,7 +68,6 @@ class DashboardController extends Controller
                 }  
             $response['machine'] = User::wherein('id',$machine_id)->count();
 
-            
             $response['daily']=TaskDetail::wherein('machine_id', $machine_id)
             ->where('target_type', 'daily')
             ->where('start_date', $today)
@@ -87,6 +84,7 @@ class DashboardController extends Controller
 
         elseif($user->userType==3)
         {
+
             $today = Carbon::now()->format('Y-m-d');
             $response['admin'] = User::where('userType',2)->count();
             $response['machine'] = User::where('userType',3)->count();
@@ -112,67 +110,38 @@ class DashboardController extends Controller
         return $response;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
+    
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+  
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+  
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy($id)
     {
         //

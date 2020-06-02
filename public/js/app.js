@@ -2008,6 +2008,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2015,13 +2029,34 @@ __webpack_require__.r(__webpack_exports__);
     BarChart2: _BarChart2_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     BarChart: _BarChart_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
+  data: function data() {
+    return {
+      tab: null,
+      dataDay: []
+    };
+  },
   props: {
     dataList: {}
   },
   computed: {},
   watch: {},
   mounted: function mounted() {},
-  method: {}
+  created: function created() {
+    this.user_type_id = this.$store.state.authUser.userType;
+    this.initialize();
+  },
+  methods: {// async initialize() {
+    // 	try {
+    // 		let { data } = await axios({
+    // 			method: "get",
+    // 			url: "/app/dashboardoverview"
+    // 		});
+    // 		this.dataDay = data;
+    // 	} catch (e) {
+    // 					this.loading=false;                
+    // 	}
+    // },
+  }
 });
 
 /***/ }),
@@ -2476,17 +2511,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           text: "Permission",
           link: "user/permission"
         }]
-      }, // {
-      //   icon: "keyboard_arrow_down",
-      //   "icon-alt": "home_work",
-      //   text: "CheckList OR Create",
-      //   model: false,
-      //    parentAllowed:'',
-      //   children: [
-      //     { text: "Machine List", link: "task/list" , },
-      //   ]
-      // },
-      {
+      }, {
+        icon: "keyboard_arrow_down",
+        "icon-alt": "home_work",
+        text: "CheckList OR Create",
+        model: false,
+        parentAllowed: '',
+        children: [{
+          text: "Machine List",
+          link: "task/list"
+        }]
+      }, {
         icon: "keyboard_arrow_down",
         "icon-alt": "attach_money",
         text: "Sacn Or AddDocument",
@@ -61677,159 +61712,147 @@ var render = function() {
                                             1
                                           ),
                                           _vm._v(" "),
-                                          _vm.editedItem.target_type != "daily"
-                                            ? _c(
-                                                "v-col",
+                                          _c(
+                                            "v-col",
+                                            {
+                                              attrs: {
+                                                cols: "12",
+                                                sm: "6",
+                                                md: "6"
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "v-menu",
                                                 {
+                                                  ref: "menu4",
                                                   attrs: {
-                                                    cols: "12",
-                                                    sm: "6",
-                                                    md: "6"
+                                                    "close-on-content-click": false,
+                                                    "nudge-right": 40,
+                                                    "return-value":
+                                                      _vm.editedItem.end_time,
+                                                    transition:
+                                                      "scale-transition",
+                                                    "offset-y": "",
+                                                    "max-width": "290px",
+                                                    "min-width": "290px"
+                                                  },
+                                                  on: {
+                                                    "update:returnValue": function(
+                                                      $event
+                                                    ) {
+                                                      return _vm.$set(
+                                                        _vm.editedItem,
+                                                        "end_time",
+                                                        $event
+                                                      )
+                                                    },
+                                                    "update:return-value": function(
+                                                      $event
+                                                    ) {
+                                                      return _vm.$set(
+                                                        _vm.editedItem,
+                                                        "end_time",
+                                                        $event
+                                                      )
+                                                    }
+                                                  },
+                                                  scopedSlots: _vm._u([
+                                                    {
+                                                      key: "activator",
+                                                      fn: function(ref) {
+                                                        var on = ref.on
+                                                        return [
+                                                          _c(
+                                                            "v-text-field",
+                                                            _vm._g(
+                                                              {
+                                                                attrs: {
+                                                                  label:
+                                                                    "End shift Time",
+                                                                  rules: [
+                                                                    function(
+                                                                      v
+                                                                    ) {
+                                                                      return (
+                                                                        !!v.length ||
+                                                                        "End Appoinment Time is required"
+                                                                      )
+                                                                    }
+                                                                  ],
+                                                                  "prepend-inner-icon":
+                                                                    "access_time",
+                                                                  readonly: "",
+                                                                  filled: ""
+                                                                },
+                                                                model: {
+                                                                  value:
+                                                                    _vm
+                                                                      .editedItem
+                                                                      .end_time,
+                                                                  callback: function(
+                                                                    $$v
+                                                                  ) {
+                                                                    _vm.$set(
+                                                                      _vm.editedItem,
+                                                                      "end_time",
+                                                                      $$v
+                                                                    )
+                                                                  },
+                                                                  expression:
+                                                                    "editedItem.end_time"
+                                                                }
+                                                              },
+                                                              on
+                                                            )
+                                                          )
+                                                        ]
+                                                      }
+                                                    }
+                                                  ]),
+                                                  model: {
+                                                    value: _vm.menu4,
+                                                    callback: function($$v) {
+                                                      _vm.menu4 = $$v
+                                                    },
+                                                    expression: "menu4"
                                                   }
                                                 },
                                                 [
-                                                  _c(
-                                                    "v-menu",
-                                                    {
-                                                      ref: "menu4",
-                                                      attrs: {
-                                                        "close-on-content-click": false,
-                                                        "nudge-right": 40,
-                                                        "return-value":
-                                                          _vm.editedItem
-                                                            .end_time,
-                                                        transition:
-                                                          "scale-transition",
-                                                        "offset-y": "",
-                                                        "max-width": "290px",
-                                                        "min-width": "290px"
-                                                      },
-                                                      on: {
-                                                        "update:returnValue": function(
-                                                          $event
-                                                        ) {
-                                                          return _vm.$set(
-                                                            _vm.editedItem,
-                                                            "end_time",
-                                                            $event
-                                                          )
+                                                  _vm._v(" "),
+                                                  _vm.menu4
+                                                    ? _c("v-time-picker", {
+                                                        attrs: {
+                                                          "ampm-in-title":
+                                                            _vm.ampmInTitle,
+                                                          "full-width": ""
                                                         },
-                                                        "update:return-value": function(
-                                                          $event
-                                                        ) {
-                                                          return _vm.$set(
-                                                            _vm.editedItem,
-                                                            "end_time",
+                                                        on: {
+                                                          "click:minute": function(
                                                             $event
-                                                          )
-                                                        }
-                                                      },
-                                                      scopedSlots: _vm._u(
-                                                        [
-                                                          {
-                                                            key: "activator",
-                                                            fn: function(ref) {
-                                                              var on = ref.on
-                                                              return [
-                                                                _c(
-                                                                  "v-text-field",
-                                                                  _vm._g(
-                                                                    {
-                                                                      attrs: {
-                                                                        label:
-                                                                          "End shift Time",
-                                                                        rules: [
-                                                                          function(
-                                                                            v
-                                                                          ) {
-                                                                            return (
-                                                                              !!v.length ||
-                                                                              "End Appoinment Time is required"
-                                                                            )
-                                                                          }
-                                                                        ],
-                                                                        "prepend-inner-icon":
-                                                                          "access_time",
-                                                                        readonly:
-                                                                          "",
-                                                                        filled:
-                                                                          ""
-                                                                      },
-                                                                      model: {
-                                                                        value:
-                                                                          _vm
-                                                                            .editedItem
-                                                                            .end_time,
-                                                                        callback: function(
-                                                                          $$v
-                                                                        ) {
-                                                                          _vm.$set(
-                                                                            _vm.editedItem,
-                                                                            "end_time",
-                                                                            $$v
-                                                                          )
-                                                                        },
-                                                                        expression:
-                                                                          "editedItem.end_time"
-                                                                      }
-                                                                    },
-                                                                    on
-                                                                  )
-                                                                )
-                                                              ]
-                                                            }
+                                                          ) {
+                                                            return _vm.$refs.menu4.save(
+                                                              _vm.time
+                                                            )
                                                           }
-                                                        ],
-                                                        null,
-                                                        false,
-                                                        3517311623
-                                                      ),
-                                                      model: {
-                                                        value: _vm.menu4,
-                                                        callback: function(
-                                                          $$v
-                                                        ) {
-                                                          _vm.menu4 = $$v
                                                         },
-                                                        expression: "menu4"
-                                                      }
-                                                    },
-                                                    [
-                                                      _vm._v(" "),
-                                                      _vm.menu4
-                                                        ? _c("v-time-picker", {
-                                                            attrs: {
-                                                              "ampm-in-title":
-                                                                _vm.ampmInTitle,
-                                                              "full-width": ""
-                                                            },
-                                                            on: {
-                                                              "click:minute": function(
-                                                                $event
-                                                              ) {
-                                                                return _vm.$refs.menu4.save(
-                                                                  _vm.time
-                                                                )
-                                                              }
-                                                            },
-                                                            model: {
-                                                              value: _vm.time,
-                                                              callback: function(
-                                                                $$v
-                                                              ) {
-                                                                _vm.time = $$v
-                                                              },
-                                                              expression: "time"
-                                                            }
-                                                          })
-                                                        : _vm._e()
-                                                    ],
-                                                    1
-                                                  )
+                                                        model: {
+                                                          value: _vm.time,
+                                                          callback: function(
+                                                            $$v
+                                                          ) {
+                                                            _vm.time = $$v
+                                                          },
+                                                          expression: "time"
+                                                        }
+                                                      })
+                                                    : _vm._e()
                                                 ],
                                                 1
                                               )
-                                            : _vm._e(),
+                                            ],
+                                            1
+                                          ),
                                           _vm._v(" "),
                                           _c(
                                             "v-col",
@@ -61933,122 +61956,106 @@ var render = function() {
                                             1
                                           ),
                                           _vm._v(" "),
-                                          _vm.editedItem.target_type != "daily"
-                                            ? _c(
-                                                "v-col",
+                                          _c(
+                                            "v-col",
+                                            {
+                                              attrs: {
+                                                cols: "12",
+                                                sm: "6",
+                                                md: "6"
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "v-menu",
                                                 {
                                                   attrs: {
-                                                    cols: "12",
-                                                    sm: "6",
-                                                    md: "6"
+                                                    "close-on-content-click": false,
+                                                    "nudge-right": 40,
+                                                    transition:
+                                                      "scale-transition",
+                                                    "offset-y": "",
+                                                    "min-width": "290px"
+                                                  },
+                                                  scopedSlots: _vm._u([
+                                                    {
+                                                      key: "activator",
+                                                      fn: function(ref) {
+                                                        var on = ref.on
+                                                        return [
+                                                          _c(
+                                                            "v-text-field",
+                                                            _vm._g(
+                                                              {
+                                                                attrs: {
+                                                                  label:
+                                                                    "End Date",
+                                                                  "prepend-inner-icon":
+                                                                    "event",
+                                                                  readonly: "",
+                                                                  filled: ""
+                                                                },
+                                                                model: {
+                                                                  value:
+                                                                    _vm
+                                                                      .editedItem
+                                                                      .end_date,
+                                                                  callback: function(
+                                                                    $$v
+                                                                  ) {
+                                                                    _vm.$set(
+                                                                      _vm.editedItem,
+                                                                      "end_date",
+                                                                      $$v
+                                                                    )
+                                                                  },
+                                                                  expression:
+                                                                    "editedItem.end_date"
+                                                                }
+                                                              },
+                                                              on
+                                                            )
+                                                          )
+                                                        ]
+                                                      }
+                                                    }
+                                                  ]),
+                                                  model: {
+                                                    value: _vm.menu1,
+                                                    callback: function($$v) {
+                                                      _vm.menu1 = $$v
+                                                    },
+                                                    expression: "menu1"
                                                   }
                                                 },
                                                 [
-                                                  _c(
-                                                    "v-menu",
-                                                    {
-                                                      attrs: {
-                                                        "close-on-content-click": false,
-                                                        "nudge-right": 40,
-                                                        transition:
-                                                          "scale-transition",
-                                                        "offset-y": "",
-                                                        "min-width": "290px"
-                                                      },
-                                                      scopedSlots: _vm._u(
-                                                        [
-                                                          {
-                                                            key: "activator",
-                                                            fn: function(ref) {
-                                                              var on = ref.on
-                                                              return [
-                                                                _c(
-                                                                  "v-text-field",
-                                                                  _vm._g(
-                                                                    {
-                                                                      attrs: {
-                                                                        label:
-                                                                          "End Date",
-                                                                        "prepend-inner-icon":
-                                                                          "event",
-                                                                        readonly:
-                                                                          "",
-                                                                        filled:
-                                                                          ""
-                                                                      },
-                                                                      model: {
-                                                                        value:
-                                                                          _vm
-                                                                            .editedItem
-                                                                            .end_date,
-                                                                        callback: function(
-                                                                          $$v
-                                                                        ) {
-                                                                          _vm.$set(
-                                                                            _vm.editedItem,
-                                                                            "end_date",
-                                                                            $$v
-                                                                          )
-                                                                        },
-                                                                        expression:
-                                                                          "editedItem.end_date"
-                                                                      }
-                                                                    },
-                                                                    on
-                                                                  )
-                                                                )
-                                                              ]
-                                                            }
-                                                          }
-                                                        ],
-                                                        null,
-                                                        false,
-                                                        3879273739
-                                                      ),
-                                                      model: {
-                                                        value: _vm.menu1,
-                                                        callback: function(
-                                                          $$v
-                                                        ) {
-                                                          _vm.menu1 = $$v
-                                                        },
-                                                        expression: "menu1"
+                                                  _vm._v(" "),
+                                                  _c("v-date-picker", {
+                                                    on: {
+                                                      input: function($event) {
+                                                        _vm.menu1 = false
                                                       }
                                                     },
-                                                    [
-                                                      _vm._v(" "),
-                                                      _c("v-date-picker", {
-                                                        on: {
-                                                          input: function(
-                                                            $event
-                                                          ) {
-                                                            _vm.menu1 = false
-                                                          }
-                                                        },
-                                                        model: {
-                                                          value:
-                                                            _vm.editedItem
-                                                              .end_date,
-                                                          callback: function(
-                                                            $$v
-                                                          ) {
-                                                            _vm.$set(
-                                                              _vm.editedItem,
-                                                              "end_date",
-                                                              $$v
-                                                            )
-                                                          },
-                                                          expression:
-                                                            "editedItem.end_date"
-                                                        }
-                                                      })
-                                                    ],
-                                                    1
-                                                  )
+                                                    model: {
+                                                      value:
+                                                        _vm.editedItem.end_date,
+                                                      callback: function($$v) {
+                                                        _vm.$set(
+                                                          _vm.editedItem,
+                                                          "end_date",
+                                                          $$v
+                                                        )
+                                                      },
+                                                      expression:
+                                                        "editedItem.end_date"
+                                                    }
+                                                  })
                                                 ],
                                                 1
                                               )
-                                            : _vm._e(),
+                                            ],
+                                            1
+                                          ),
                                           _vm._v(" "),
                                           _c(
                                             "v-col",

@@ -38,13 +38,27 @@
 	 <v-row  justify="center" >
 						<v-flex xs12 sm12 md6 lg6 pa-2>
 							<v-card flat class="elevation-8">
-									<BarChart :dataList="dataList" />				
-								</v-card>
+									<BarChart :dataList="dataList" />	
+									 <!-- <v-tabs vertical v-model="tab">
+                                <v-tab v-for="(data,index) in dataDay" :key="index" >
+                                  {{data.name}}
+                                </v-tab>
+                                <v-tab-item  v-model="tab">
+									<v-card flat max-width="1050">
+                                  
+                                                <v-card-text>
+                                                    {{data.name}} /
+													{{item.name}}
+											</v-card-text>
+									</v-card>
+                                </v-tab-item>
+                            </v-tabs>			 -->
+							</v-card>
 						</v-flex>
 						<v-flex xs12 sm12 md6 lg6 pa-2>
 							<v-card flat class="elevation-8">
 									<BarChart2 :dataList="dataList" />				
-								</v-card>
+							</v-card>
 						</v-flex>
 						
 					</v-row>
@@ -122,6 +136,11 @@ export default {
 		BarChart2,
 		BarChart,
 	},
+	data: () => ({
+	tab:null,
+		dataDay:[],
+		
+	}),
     props:{
             dataList:{},
     },
@@ -133,10 +152,26 @@ export default {
 	{
 		
 	},
-	method:{
-		
-		
-		
+		created() {
+		this.user_type_id = this.$store.state.authUser.userType
+		this.initialize();
+
+	},
+	methods: {
+		// async initialize() {
+			
+		// 	try {
+		// 		let { data } = await axios({
+		// 			method: "get",
+		// 			url: "/app/dashboardoverview"
+		// 		});
+		// 		this.dataDay = data;
+				
+		// 	} catch (e) {
+		// 					this.loading=false;                
+		// 	}
+			
+		// },
 	}
 }
 </script>

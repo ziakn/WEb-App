@@ -152,7 +152,7 @@ font-weight: 200;
                                     ></v-time-picker>
                                 </v-menu>
                             </v-col>
-                            <v-col cols="12" sm="6" md="6" v-if="editedItem.target_type != 'daily' ">
+                            <v-col cols="12" sm="6" md="6" >
                                  <v-menu
                                      ref="menu4"
                                     v-model="menu4"
@@ -206,7 +206,7 @@ font-weight: 200;
                                     <v-date-picker v-model="editedItem.start_date" @input="menu3 = false"></v-date-picker>
                                 </v-menu>
                             </v-col>
-							<v-col cols="12" sm="6" md="6" v-if="editedItem.target_type != 'daily' ">
+							<v-col cols="12" sm="6" md="6">
                                 <v-menu
                                     v-model="menu1"
                                     :close-on-content-click="false"
