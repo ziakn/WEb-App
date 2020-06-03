@@ -4,7 +4,7 @@
 			<v-overlay :value="showFullLoading" :absolute="absolute">
 				<v-progress-circular indeterminate size="64"></v-progress-circular>
 			</v-overlay>
-			<AdminOverView :dataList="dataList" v-if="user_type_id ==1 "></AdminOverView>
+			<AdminOverView :dataList="dataList" :dataDay="dataDay" v-if="user_type_id ==1 "  ></AdminOverView>
 			<SubAdminOverView :dataList="dataList" v-if="user_type_id ==2 "></SubAdminOverView>
 			<MachineOverView :dataList="dataList" v-if="user_type_id ==3 "></MachineOverView>
 		</v-container> 
@@ -24,6 +24,7 @@ export default {
 	data: () => ({
         	absolute: true,
 			dataList: {},
+			dataDay:[],
 			user_type_id:null,	
 	}),
 
@@ -53,6 +54,18 @@ export default {
 							this.loading=false;                
 			}
 			
+
+			try {
+				let { data } = await axios({
+					method: "get",
+					url: "/app/superadmindashboardoverview"
+				});
+				this.dataDay = data;
+				
+			} catch (e) {
+							this.loading=false;                
+			}
+			console.log(this.dataDay)
         },
         
 		

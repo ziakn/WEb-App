@@ -55,6 +55,7 @@ Route::get('/app/getuserpages/{id}','Dashboard\PagesController@getuserpages');
 Route::get('/app/getusertype/{id}','Dashboard\PagesController@getuserType');
 
 
+Route::get('/app/superadmindashboardoverview','Dashboard\DashboardController@getSuperAdminMachine');
 
 
 

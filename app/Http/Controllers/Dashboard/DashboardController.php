@@ -41,7 +41,7 @@ class DashboardController extends Controller
                     {
                         array_push($machine_id,$item['id']);
                     }  
-                $response['daily']=TaskDetail::wherein('machine_id', $machine_id)
+                $response['daily'] = TaskDetail::wherein('machine_id', $machine_id)
                 ->where('target_type', 'daily')
                 ->where('start_date','>', Carbon::now()->subDays(30)->format('Y-m-d'))
                 ->with('machine')
@@ -49,10 +49,21 @@ class DashboardController extends Controller
 
                 $week = Carbon::now()->subDays(7)->format('Y-m-d');
                 $response['week'] = TaskDetail::where('target_type', 'weekly')
-                ->where('start_date','>=', $week)
+                ->where('start_date','>=', Carbon::now()->subDays(30)->format('Y-m-d'))
                 ->with('machine')
                 ->get();
 
+                // $response['daily'] = TaskDetail::wherein('machine_id', $machine_id)
+                // ->where('target_type', 'daily')
+                // ->where('start_date','>', Carbon::now()->subDays(30)->format('Y-m-d'))
+                // ->with('machine')
+                // ->get();
+
+                // $week = Carbon::now()->subDays(7)->format('Y-m-d');
+                // $response['week'] = TaskDetail::where('target_type', 'weekly')
+                // ->where('start_date','>=', Carbon::now()->subDays(30)->format('Y-m-d'))
+                // ->with('machine')
+                // ->get();
                 $response['newAdmin'] = User::orderBy('id','DESC')->where('userType',2)->limit(5)->get();
                 $response['newMachine'] = User::orderBy('id','DESC')->where('userType',3)->limit(5)->get();
         }
@@ -145,5 +156,12 @@ class DashboardController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+
+    public  function getSuperAdminMachine()
+    {
+        $data = User::where('userType',3)->get();
+        return $data;
     }
 }

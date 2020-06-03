@@ -1,7 +1,6 @@
 <template>
  <div>
      <v-row justify="center" >
-        
 					<v-flex xs12 sm6 md4 lg3 pa-2>
 						<v-card class="elevation-8" color="purple darken-4" dark>
 							<v-card-title>
@@ -22,7 +21,7 @@
 						<v-card class="elevation-8" color="deep-purple  darken-4" dark>
 							<v-card-title>
 							<v-flex xs6>
-								<v-icon size="72">attach_money</v-icon>
+								<v-icon size="72">account_tree</v-icon>
 							</v-flex>
 							<v-flex xs6 class="text-xs-right">
 								<h3 class="display-2 ">{{dataList.machine}} <small class="body-1"></small></h3>
@@ -31,6 +30,22 @@
 							</v-card-title>
 							<v-card-actions>
 							<div class="body-1"> Total Machine</div>
+							</v-card-actions>
+						</v-card>
+					</v-flex>
+					<v-flex xs12 sm6 md4 lg3 pa-2>
+						<v-card class="elevation-8" color="deep-purple  darken-4" dark>
+							<v-card-title>
+							<v-flex xs6>
+								<v-icon size="72">signal_cellular_alt</v-icon>
+							</v-flex>
+							<v-flex xs6 class="text-xs-right">
+								<h3 class="display-2 ">98 %<small class="body-1"></small></h3>
+								<h6 class="caption "></h6>
+							</v-flex>
+							</v-card-title>
+							<v-card-actions>
+							<div class="body-1"> Machine Efficiency</div>
 							</v-card-actions>
 						</v-card>
 					</v-flex>
@@ -138,11 +153,12 @@ export default {
 	},
 	data: () => ({
 	tab:null,
-		dataDay:[],
+		
 		
 	}),
     props:{
-            dataList:{},
+			dataList:{},
+			dataDay:Array,
     },
     	computed: {	
 	},
@@ -154,24 +170,16 @@ export default {
 	},
 		created() {
 		this.user_type_id = this.$store.state.authUser.userType
-		this.initialize();
+		
+		console.log(this.dataDay)
 
 	},
 	methods: {
-		// async initialize() {
+		async initialize() {
 			
-		// 	try {
-		// 		let { data } = await axios({
-		// 			method: "get",
-		// 			url: "/app/dashboardoverview"
-		// 		});
-		// 		this.dataDay = data;
-				
-		// 	} catch (e) {
-		// 					this.loading=false;                
-		// 	}
 			
-		// },
+			
+		},
 	}
 }
 </script>

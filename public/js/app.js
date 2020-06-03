@@ -1891,8 +1891,31 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _BarChart_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BarChart.vue */ "./resources/js/components/dashboard/common/BarChart.vue");
-/* harmony import */ var _BarChart2_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BarChart2.vue */ "./resources/js/components/dashboard/common/BarChart2.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _BarChart_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BarChart.vue */ "./resources/js/components/dashboard/common/BarChart.vue");
+/* harmony import */ var _BarChart2_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./BarChart2.vue */ "./resources/js/components/dashboard/common/BarChart2.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2026,36 +2049,39 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    BarChart2: _BarChart2_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    BarChart: _BarChart_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    BarChart2: _BarChart2_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    BarChart: _BarChart_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
-      tab: null,
-      dataDay: []
+      tab: null
     };
   },
   props: {
-    dataList: {}
+    dataList: {},
+    dataDay: Array
   },
   computed: {},
   watch: {},
   mounted: function mounted() {},
   created: function created() {
     this.user_type_id = this.$store.state.authUser.userType;
-    this.initialize();
+    console.log(this.dataDay);
   },
-  methods: {// async initialize() {
-    // 	try {
-    // 		let { data } = await axios({
-    // 			method: "get",
-    // 			url: "/app/dashboardoverview"
-    // 		});
-    // 		this.dataDay = data;
-    // 	} catch (e) {
-    // 					this.loading=false;                
-    // 	}
-    // },
+  methods: {
+    initialize: function initialize() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    }
   }
 });
 
@@ -3296,6 +3322,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       absolute: true,
       dataList: {},
+      dataDay: [],
       user_type_id: null
     };
   },
@@ -3311,7 +3338,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var _yield$axios, data;
+        var _yield$axios, data, _yield$axios2, _data;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
@@ -3337,11 +3364,34 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.loading = false;
 
               case 11:
+                _context.prev = 11;
+                _context.next = 14;
+                return axios({
+                  method: "get",
+                  url: "/app/superadmindashboardoverview"
+                });
+
+              case 14:
+                _yield$axios2 = _context.sent;
+                _data = _yield$axios2.data;
+                _this.dataDay = _data;
+                _context.next = 22;
+                break;
+
+              case 19:
+                _context.prev = 19;
+                _context.t1 = _context["catch"](11);
+                _this.loading = false;
+
+              case 22:
+                console.log(_this.dataDay);
+
+              case 23:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 8]]);
+        }, _callee, null, [[0, 8], [11, 19]]);
       }))();
     }
   }
@@ -58063,7 +58113,7 @@ var render = function() {
                         { attrs: { xs6: "" } },
                         [
                           _c("v-icon", { attrs: { size: "72" } }, [
-                            _vm._v("attach_money")
+                            _vm._v("account_tree")
                           ])
                         ],
                         1
@@ -58088,6 +58138,59 @@ var render = function() {
                   _c("v-card-actions", [
                     _c("div", { staticClass: "body-1" }, [
                       _vm._v(" Total Machine")
+                    ])
+                  ])
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs12: "", sm6: "", md4: "", lg3: "", "pa-2": "" } },
+            [
+              _c(
+                "v-card",
+                {
+                  staticClass: "elevation-8",
+                  attrs: { color: "deep-purple  darken-4", dark: "" }
+                },
+                [
+                  _c(
+                    "v-card-title",
+                    [
+                      _c(
+                        "v-flex",
+                        { attrs: { xs6: "" } },
+                        [
+                          _c("v-icon", { attrs: { size: "72" } }, [
+                            _vm._v("signal_cellular_alt")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { staticClass: "text-xs-right", attrs: { xs6: "" } },
+                        [
+                          _c("h3", { staticClass: "display-2 " }, [
+                            _vm._v("98 %"),
+                            _c("small", { staticClass: "body-1" })
+                          ]),
+                          _vm._v(" "),
+                          _c("h6", { staticClass: "caption " })
+                        ]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("v-card-actions", [
+                    _c("div", { staticClass: "body-1" }, [
+                      _vm._v(" Machine Efficiency")
                     ])
                   ])
                 ],
@@ -58452,7 +58555,7 @@ var render = function() {
           _c("v-app-bar-nav-icon", { on: { click: _vm.drawerTrigger } }),
           _vm._v(" "),
           _c("span", { staticClass: "hidden-sm-and-down" }, [
-            _vm._v("Mushin We App")
+            _vm._v("Mushin Web App")
           ])
         ],
         1
@@ -59724,7 +59827,9 @@ var render = function() {
           ),
           _vm._v(" "),
           _vm.user_type_id == 1
-            ? _c("AdminOverView", { attrs: { dataList: _vm.dataList } })
+            ? _c("AdminOverView", {
+                attrs: { dataList: _vm.dataList, dataDay: _vm.dataDay }
+              })
             : _vm._e(),
           _vm._v(" "),
           _vm.user_type_id == 2
