@@ -161,7 +161,135 @@ class DashboardController extends Controller
 
     public  function getSuperAdminMachine()
     {
+        $user = Auth::user();
+        if($user->userType==1)
+        {
         $data = User::where('userType',3)->get();
+        return $data;
+        }
+        elseif($user->userType==2)
+        {
+            $machine=AdminMachine::where('admin_id',$user->id)->get(); 
+                $machine_id=array();
+                foreach($machine as $item)
+                {
+                    array_push($machine_id,$item['machine_id']);
+                }  
+                return $data = User::wherein('id',$machine_id)->get();
+            
+        }
+
+        elseif($user->userType==3)
+        {
+            return $data = User::find($user->id);
+        }
+    }
+
+    public function getSuperAdminMachineDataDaily($id)
+    {
+        $data = TaskDetail::where('machine_id', $id)
+                ->where('target_type', 'daily')
+                ->where('start_date','>', Carbon::now()->subDays(30)->format('Y-m-d'))
+                ->with('machine')
+                ->get();
+
+        return $data;
+    }
+
+    public function getSuperAdminMachineDataWeekly($id)
+    {
+        $data = TaskDetail::where('machine_id', $id)
+                ->where('target_type', 'weekly')
+                ->where('start_date','>', Carbon::now()->subDays(90)->format('Y-m-d'))
+                ->with('machine')
+                ->get();
+
+        return $data;
+    }
+
+
+    public function getSuperAdminMachineDataMonthly($id)
+    {
+        $data = TaskDetail::where('machine_id', $id)
+                ->where('target_type', 'monthly')
+                ->where('start_date','>', Carbon::now()->subDays(365)->format('Y-m-d'))
+                ->with('machine')
+                ->get();
+
+        return $data;
+    }
+
+    public  function getsubAdminMachine()
+    {
+        $data = User::where('userType',3)->get();
+        return $data;
+    }
+
+    public function getSubAdminMachineDataDaily($id)
+    {
+        $data = TaskDetail::where('machine_id', $id)
+                ->where('target_type', 'daily')
+                ->where('start_date','>', Carbon::now()->subDays(30)->format('Y-m-d'))
+                ->with('machine')
+                ->get();
+
+        return $data;
+    }
+
+    public function getSubAdminMachineDataWeekly($id)
+    {
+        $data = TaskDetail::where('machine_id', $id)
+                ->where('target_type', 'weekly')
+                ->where('start_date','>', Carbon::now()->subDays(90)->format('Y-m-d'))
+                ->with('machine')
+                ->get();
+
+        return $data;
+    }
+
+
+    public function getSubAdminMachineDataMonthly($id)
+    {
+        $data = TaskDetail::where('machine_id', $id)
+                ->where('target_type', 'monthly')
+                ->where('start_date','>', Carbon::now()->subDays(365)->format('Y-m-d'))
+                ->with('machine')
+                ->get();
+
+        return $data;
+    }
+
+    public function getMachineAdminMachineDataDaily($id)
+    {
+        $data = TaskDetail::where('machine_id', $id)
+                ->where('target_type', 'daily')
+                ->where('start_date','>', Carbon::now()->subDays(30)->format('Y-m-d'))
+                ->with('machine')
+                ->get();
+
+        return $data;
+    }
+
+    public function getMachineAdminMachineDataWeekly($id)
+    {
+        $data = TaskDetail::where('machine_id', $id)
+                ->where('target_type', 'weekly')
+                ->where('start_date','>', Carbon::now()->subDays(90)->format('Y-m-d'))
+                ->with('machine')
+                ->get();
+
+        return $data;
+    }
+
+
+    public function getMachineAdminMachineDataMonthly($id)
+    {
+        $data = TaskDetail::where('machine_id', $id)
+                ->where('target_type', 'monthly')
+                ->where('start_date','>', Carbon::now()->subDays(365)->format('Y-m-d'))
+                ->with('machine')
+                ->get();
+
         return $data;
     }
 }

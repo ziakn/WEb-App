@@ -5,14 +5,14 @@ export default {
   extends: Bar,
    props:
       {
-             dataList:Object
+             dataMachineWeekly:Array
              
       },
   data() {
     return {
       gradient: null,
       gradient2: null,
-   myData:{},
+      myData:[],
       qunatity_produce:[],
       start_date:[],
       machine:[],
@@ -22,26 +22,24 @@ export default {
     };
   },
    watch: {
-    dataList() {
+    dataMachineWeekly() {
 
-      this.myData=this.dataList;
+      this.myData=this.dataMachineWeekly;
       if(this.myData)
           {
-          for(let p of this.myData.week)
+          for(let p of this.myData)
                       {
                             this.qunatity_produce.push(p.qunatity_produce)
                             this.machine.push(p.machine.name)
+                            this.start_date.push(p.start_date)
                       }
-                       
-         
           };
-          this.renderChart(
+    this.renderChart(
       {
-        labels:  this.machine,
+        labels:  this.start_date,
         datasets: [
-         
           {
-            label: "Last 7 Days",
+            label: "Last 90 Days" ,
             borderColor: "#05CBE1",
             pointBackgroundColor: "white",
             pointBorderColor: "white",
@@ -71,13 +69,6 @@ export default {
     this.gradient2.addColorStop(0, "rgba(0, 231, 255, 0.9)");
     this.gradient2.addColorStop(0.5, "rgba(0, 231, 255, 0.25)");
     this.gradient2.addColorStop(1, "rgba(0, 231, 255, 0)");
-
-      
-      
-        
-    
-      
-    
   },
   
   created()

@@ -5,8 +5,8 @@
 				<v-progress-circular indeterminate size="64"></v-progress-circular>
 			</v-overlay>
 			<AdminOverView :dataList="dataList" :dataDay="dataDay" v-if="user_type_id ==1 "  ></AdminOverView>
-			<SubAdminOverView :dataList="dataList" v-if="user_type_id ==2 "></SubAdminOverView>
-			<MachineOverView :dataList="dataList" v-if="user_type_id ==3 "></MachineOverView>
+			<SubAdminOverView :dataList="dataList" :dataDay="dataDay" v-if="user_type_id ==2 "></SubAdminOverView>
+			<MachineOverView :dataList="dataList" :dataDay="dataDay" v-if="user_type_id ==3 "></MachineOverView>
 		</v-container> 
 	</v-content>
 </template>
@@ -65,7 +65,6 @@ export default {
 			} catch (e) {
 							this.loading=false;                
 			}
-			console.log(this.dataDay)
         },
         
 		

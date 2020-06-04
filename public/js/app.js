@@ -1895,6 +1895,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _BarChart_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BarChart.vue */ "./resources/js/components/dashboard/common/BarChart.vue");
 /* harmony import */ var _BarChart2_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./BarChart2.vue */ "./resources/js/components/dashboard/common/BarChart2.vue");
+/* harmony import */ var _BarChart3_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./BarChart3.vue */ "./resources/js/components/dashboard/common/BarChart3.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2045,16 +2046,78 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     BarChart2: _BarChart2_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    BarChart: _BarChart_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    BarChart: _BarChart_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    BarChart3: _BarChart3_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   data: function data() {
     return {
-      tab: null
+      tab: null,
+      tab1: null,
+      tab2: null,
+      dataMachine: [],
+      dataMachineWeekly: [],
+      dataMachineMonthly: []
     };
   },
   props: {
@@ -2062,11 +2125,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     dataDay: Array
   },
   computed: {},
-  watch: {},
+  watch: {
+    dataDay: function dataDay() {
+      if (this.dataDay) {
+        this.getDaily(this.dataDay[0]);
+      }
+    }
+  },
   mounted: function mounted() {},
   created: function created() {
     this.user_type_id = this.$store.state.authUser.userType;
-    console.log(this.dataDay);
   },
   methods: {
     initialize: function initialize() {
@@ -2080,6 +2148,80 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee);
+      }))();
+    },
+    getDaily: function getDaily(item) {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var _yield$axios, data, _yield$axios2, _data, _yield$axios3, _data2;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return axios({
+                  method: "get",
+                  url: "/app/superadmingetmachinedaily/" + item.id
+                });
+
+              case 3:
+                _yield$axios = _context2.sent;
+                data = _yield$axios.data;
+                _this.dataMachine = data;
+                _context2.next = 10;
+                break;
+
+              case 8:
+                _context2.prev = 8;
+                _context2.t0 = _context2["catch"](0);
+
+              case 10:
+                _context2.prev = 10;
+                _context2.next = 13;
+                return axios({
+                  method: "get",
+                  url: "/app/superadmingetmachineweekly/" + item.id
+                });
+
+              case 13:
+                _yield$axios2 = _context2.sent;
+                _data = _yield$axios2.data;
+                _this.dataMachineWeekly = _data;
+                _context2.next = 20;
+                break;
+
+              case 18:
+                _context2.prev = 18;
+                _context2.t1 = _context2["catch"](10);
+
+              case 20:
+                _context2.prev = 20;
+                _context2.next = 23;
+                return axios({
+                  method: "get",
+                  url: "/app/superadmingetmachinemonthly/" + item.id
+                });
+
+              case 23:
+                _yield$axios3 = _context2.sent;
+                _data2 = _yield$axios3.data;
+                _this.dataMachineMonthly = _data2;
+                _context2.next = 30;
+                break;
+
+              case 28:
+                _context2.prev = 28;
+                _context2.t2 = _context2["catch"](20);
+
+              case 30:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 8], [10, 18], [20, 28]]);
       }))();
     }
   }
@@ -2107,13 +2249,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 /* harmony default export */ __webpack_exports__["default"] = ({
   "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_0__["Bar"],
   props: {
-    dataList: Object
+    dataMachineMonthly: Array
   },
   data: function data() {
     return {
       gradient: null,
       gradient2: null,
-      myData: {},
+      myData: [],
       qunatity_produce: [],
       start_date: [],
       machine: [],
@@ -2121,19 +2263,19 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     };
   },
   watch: {
-    dataList: function dataList() {
-      this.myData = this.dataList;
+    dataMachineMonthly: function dataMachineMonthly() {
+      this.myData = this.dataMachineMonthly;
 
       if (this.myData) {
-        var _iterator = _createForOfIteratorHelper(this.myData.daily),
+        var _iterator = _createForOfIteratorHelper(this.myData),
             _step;
 
         try {
           for (_iterator.s(); !(_step = _iterator.n()).done;) {
             var p = _step.value;
             this.qunatity_produce.push(p.qunatity_produce);
-            this.start_date = p.start_date;
             this.machine.push(p.machine.name);
+            this.start_date.push(p.start_date);
           }
         } catch (err) {
           _iterator.e(err);
@@ -2144,14 +2286,14 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
       ;
       this.renderChart({
-        labels: this.machine,
+        labels: this.start_date,
         datasets: [{
-          label: "Today",
+          label: "Last 365 Days ",
           borderColor: "#05CBE1",
           pointBackgroundColor: "white",
           pointBorderColor: "white",
           borderWidth: 1,
-          backgroundColor: this.gradient2,
+          backgroundColor: this.gradient,
           data: this.qunatity_produce
         }]
       }, {
@@ -2163,9 +2305,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   mounted: function mounted() {
     this.gradient = this.$refs.canvas.getContext("2d").createLinearGradient(0, 0, 0, 450);
     this.gradient2 = this.$refs.canvas.getContext("2d").createLinearGradient(0, 0, 0, 450);
-    this.gradient.addColorStop(0, "rgba(255, 0,0, 0.5)");
-    this.gradient.addColorStop(0.5, "rgba(255, 0, 0, 0.25)");
-    this.gradient.addColorStop(1, "rgba(255, 0, 0, 0)");
+    this.gradient.addColorStop(0, "rgba(25, 0, 89, 0.5)");
+    this.gradient.addColorStop(0.5, "rgba(155, 0, 10, 0.25)");
+    this.gradient.addColorStop(1, "rgba(55, 0, 96, 0)");
     this.gradient2.addColorStop(0, "rgba(0, 231, 255, 0.9)");
     this.gradient2.addColorStop(0.5, "rgba(0, 231, 255, 0.25)");
     this.gradient2.addColorStop(1, "rgba(0, 231, 255, 0)");
@@ -2196,13 +2338,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 /* harmony default export */ __webpack_exports__["default"] = ({
   "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_0__["Bar"],
   props: {
-    dataList: Object
+    dataMachineWeekly: Array
   },
   data: function data() {
     return {
       gradient: null,
       gradient2: null,
-      myData: {},
+      myData: [],
       qunatity_produce: [],
       start_date: [],
       machine: [],
@@ -2210,11 +2352,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     };
   },
   watch: {
-    dataList: function dataList() {
-      this.myData = this.dataList;
+    dataMachineWeekly: function dataMachineWeekly() {
+      this.myData = this.dataMachineWeekly;
 
       if (this.myData) {
-        var _iterator = _createForOfIteratorHelper(this.myData.week),
+        var _iterator = _createForOfIteratorHelper(this.myData),
             _step;
 
         try {
@@ -2222,6 +2364,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
             var p = _step.value;
             this.qunatity_produce.push(p.qunatity_produce);
             this.machine.push(p.machine.name);
+            this.start_date.push(p.start_date);
           }
         } catch (err) {
           _iterator.e(err);
@@ -2232,14 +2375,103 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
       ;
       this.renderChart({
-        labels: this.machine,
+        labels: this.start_date,
         datasets: [{
-          label: "Last 7 Days",
+          label: "Last 90 Days",
           borderColor: "#05CBE1",
           pointBackgroundColor: "white",
           pointBorderColor: "white",
           borderWidth: 1,
           backgroundColor: this.gradient2,
+          data: this.qunatity_produce
+        }]
+      }, {
+        responsive: true,
+        maintainAspectRatio: false
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.gradient = this.$refs.canvas.getContext("2d").createLinearGradient(0, 0, 0, 450);
+    this.gradient2 = this.$refs.canvas.getContext("2d").createLinearGradient(0, 0, 0, 450);
+    this.gradient.addColorStop(0, "rgba(255, 0,0, 0.5)");
+    this.gradient.addColorStop(0.5, "rgba(255, 0, 0, 0.25)");
+    this.gradient.addColorStop(1, "rgba(255, 0, 0, 0)");
+    this.gradient2.addColorStop(0, "rgba(0, 231, 255, 0.9)");
+    this.gradient2.addColorStop(0.5, "rgba(0, 231, 255, 0.25)");
+    this.gradient2.addColorStop(1, "rgba(0, 231, 255, 0)");
+  },
+  created: function created() {},
+  method: {}
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/common/BarChart3.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/common/BarChart3.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
+function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_0__["Bar"],
+  props: {
+    dataMachine: Array
+  },
+  data: function data() {
+    return {
+      gradient: null,
+      gradient2: null,
+      myData: [],
+      qunatity_produce: [],
+      start_date: [],
+      machine: [],
+      month: []
+    };
+  },
+  watch: {
+    dataMachine: function dataMachine() {
+      this.myData = this.dataMachine;
+
+      if (this.myData) {
+        var _iterator = _createForOfIteratorHelper(this.myData),
+            _step;
+
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var p = _step.value;
+            this.qunatity_produce.push(p.qunatity_produce);
+            this.machine.push(p.machine.name);
+            this.start_date.push(p.start_date);
+          }
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
+        }
+      }
+
+      ;
+      this.renderChart({
+        labels: this.start_date,
+        datasets: [{
+          label: "Last 30 Days",
+          borderColor: "#05CBE1",
+          pointBackgroundColor: "white",
+          pointBorderColor: "white",
+          borderWidth: 1,
+          backgroundColor: this.gradient,
           data: this.qunatity_produce
         }]
       }, {
@@ -2643,8 +2875,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _BarChart_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BarChart.vue */ "./resources/js/components/dashboard/common/BarChart.vue");
-/* harmony import */ var _BarChart2_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BarChart2.vue */ "./resources/js/components/dashboard/common/BarChart2.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _BarChart_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BarChart.vue */ "./resources/js/components/dashboard/common/BarChart.vue");
+/* harmony import */ var _BarChart2_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./BarChart2.vue */ "./resources/js/components/dashboard/common/BarChart2.vue");
+/* harmony import */ var _BarChart3_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./BarChart3.vue */ "./resources/js/components/dashboard/common/BarChart3.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -2699,20 +2940,131 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    BarChart2: _BarChart2_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    BarChart: _BarChart_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    BarChart2: _BarChart2_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    BarChart: _BarChart_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    BarChart3: _BarChart3_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+  },
+  data: function data() {
+    return {
+      tab: null,
+      tab1: null,
+      tab2: null,
+      dataMachine: [],
+      dataMachineWeekly: [],
+      dataMachineMonthly: []
+    };
   },
   props: {
-    dataList: {}
+    dataList: {},
+    dataDay: {}
   },
   computed: {},
   watch: {},
   mounted: function mounted() {},
-  method: {}
+  created: function created() {
+    this.user_type_id = this.$store.state.authUser.userType;
+    this.getDaily();
+  },
+  methods: {
+    initialize: function initialize() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    getDaily: function getDaily() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var _yield$axios, data, _yield$axios2, _data, _yield$axios3, _data2;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return axios({
+                  method: "get",
+                  url: "/app/machineadmingetmachinedaily/" + _this.user_type_id
+                });
+
+              case 3:
+                _yield$axios = _context2.sent;
+                data = _yield$axios.data;
+                _this.dataMachine = data;
+                _context2.next = 10;
+                break;
+
+              case 8:
+                _context2.prev = 8;
+                _context2.t0 = _context2["catch"](0);
+
+              case 10:
+                _context2.prev = 10;
+                _context2.next = 13;
+                return axios({
+                  method: "get",
+                  url: "/app/machineadmingetmachineweekly/" + _this.user_type_id
+                });
+
+              case 13:
+                _yield$axios2 = _context2.sent;
+                _data = _yield$axios2.data;
+                _this.dataMachineWeekly = _data;
+                _context2.next = 20;
+                break;
+
+              case 18:
+                _context2.prev = 18;
+                _context2.t1 = _context2["catch"](10);
+
+              case 20:
+                _context2.prev = 20;
+                _context2.next = 23;
+                return axios({
+                  method: "get",
+                  url: "/app/machineadmingetmachinemonthly/" + _this.user_type_id
+                });
+
+              case 23:
+                _yield$axios3 = _context2.sent;
+                _data2 = _yield$axios3.data;
+                _this.dataMachineMonthly = _data2;
+                _context2.next = 30;
+                break;
+
+              case 28:
+                _context2.prev = 28;
+                _context2.t2 = _context2["catch"](20);
+
+              case 30:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 8], [10, 18], [20, 28]]);
+      }))();
+    }
+  }
 });
 
 /***/ }),
@@ -2726,8 +3078,17 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _BarChart_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BarChart.vue */ "./resources/js/components/dashboard/common/BarChart.vue");
-/* harmony import */ var _BarChart2_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BarChart2.vue */ "./resources/js/components/dashboard/common/BarChart2.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _BarChart_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BarChart.vue */ "./resources/js/components/dashboard/common/BarChart.vue");
+/* harmony import */ var _BarChart2_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./BarChart2.vue */ "./resources/js/components/dashboard/common/BarChart2.vue");
+/* harmony import */ var _BarChart3_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./BarChart3.vue */ "./resources/js/components/dashboard/common/BarChart3.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -2765,20 +3126,171 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    BarChart2: _BarChart2_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    BarChart: _BarChart_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    BarChart2: _BarChart2_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    BarChart: _BarChart_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    BarChart3: _BarChart3_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+  },
+  data: function data() {
+    return {
+      tab: null,
+      tab1: null,
+      tab2: null,
+      dataMachine: [],
+      dataMachineWeekly: [],
+      dataMachineMonthly: []
+    };
   },
   props: {
-    dataList: {}
+    dataList: {},
+    dataDay: Array
   },
   computed: {},
-  watch: {},
+  watch: {
+    dataDay: function dataDay() {
+      if (this.dataDay) {
+        this.getDaily(this.dataDay[0]);
+      }
+    }
+  },
   mounted: function mounted() {},
-  method: {}
+  methods: {
+    initialize: function initialize() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    getDaily: function getDaily(item) {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var _yield$axios, data, _yield$axios2, _data, _yield$axios3, _data2;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return axios({
+                  method: "get",
+                  url: "/app/subadmingetmachinedaily/" + item.id
+                });
+
+              case 3:
+                _yield$axios = _context2.sent;
+                data = _yield$axios.data;
+                _this.dataMachine = data;
+                _context2.next = 10;
+                break;
+
+              case 8:
+                _context2.prev = 8;
+                _context2.t0 = _context2["catch"](0);
+
+              case 10:
+                _context2.prev = 10;
+                _context2.next = 13;
+                return axios({
+                  method: "get",
+                  url: "/app/subadmingetmachineweekly/" + item.id
+                });
+
+              case 13:
+                _yield$axios2 = _context2.sent;
+                _data = _yield$axios2.data;
+                _this.dataMachineWeekly = _data;
+                _context2.next = 20;
+                break;
+
+              case 18:
+                _context2.prev = 18;
+                _context2.t1 = _context2["catch"](10);
+
+              case 20:
+                _context2.prev = 20;
+                _context2.next = 23;
+                return axios({
+                  method: "get",
+                  url: "/app/subadmingetmachinemonthly/" + item.id
+                });
+
+              case 23:
+                _yield$axios3 = _context2.sent;
+                _data2 = _yield$axios3.data;
+                _this.dataMachineMonthly = _data2;
+                _context2.next = 30;
+                break;
+
+              case 28:
+                _context2.prev = 28;
+                _context2.t2 = _context2["catch"](20);
+
+              case 30:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 8], [10, 18], [20, 28]]);
+      }))();
+    }
+  }
 });
 
 /***/ }),
@@ -3384,9 +3896,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.loading = false;
 
               case 22:
-                console.log(_this.dataDay);
-
-              case 23:
               case "end":
                 return _context.stop();
             }
@@ -58043,7 +58552,7 @@ var render = function() {
         [
           _c(
             "v-flex",
-            { attrs: { xs12: "", sm6: "", md4: "", lg3: "", "pa-2": "" } },
+            { attrs: { xs12: "", sm6: "", md6: "", lg6: "", "pa-2": "" } },
             [
               _c(
                 "v-card",
@@ -58096,7 +58605,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "v-flex",
-            { attrs: { xs12: "", sm6: "", md4: "", lg3: "", "pa-2": "" } },
+            { attrs: { xs12: "", sm6: "", md6: "", lg6: "", "pa-2": "" } },
             [
               _c(
                 "v-card",
@@ -58145,59 +58654,6 @@ var render = function() {
               )
             ],
             1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-flex",
-            { attrs: { xs12: "", sm6: "", md4: "", lg3: "", "pa-2": "" } },
-            [
-              _c(
-                "v-card",
-                {
-                  staticClass: "elevation-8",
-                  attrs: { color: "deep-purple  darken-4", dark: "" }
-                },
-                [
-                  _c(
-                    "v-card-title",
-                    [
-                      _c(
-                        "v-flex",
-                        { attrs: { xs6: "" } },
-                        [
-                          _c("v-icon", { attrs: { size: "72" } }, [
-                            _vm._v("signal_cellular_alt")
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { staticClass: "text-xs-right", attrs: { xs6: "" } },
-                        [
-                          _c("h3", { staticClass: "display-2 " }, [
-                            _vm._v("98 %"),
-                            _c("small", { staticClass: "body-1" })
-                          ]),
-                          _vm._v(" "),
-                          _c("h6", { staticClass: "caption " })
-                        ]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("v-card-actions", [
-                    _c("div", { staticClass: "body-1" }, [
-                      _vm._v(" Machine Efficiency")
-                    ])
-                  ])
-                ],
-                1
-              )
-            ],
-            1
           )
         ],
         1
@@ -58209,27 +58665,256 @@ var render = function() {
         [
           _c(
             "v-flex",
-            { attrs: { xs12: "", sm12: "", md6: "", lg6: "", "pa-2": "" } },
+            { attrs: { xs12: "", sm12: "", md12: "", lg12: "", "pa-2": "" } },
             [
               _c(
-                "v-card",
-                { staticClass: "elevation-8", attrs: { flat: "" } },
-                [_c("BarChart", { attrs: { dataList: _vm.dataList } })],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-flex",
-            { attrs: { xs12: "", sm12: "", md6: "", lg6: "", "pa-2": "" } },
-            [
-              _c(
-                "v-card",
-                { staticClass: "elevation-8", attrs: { flat: "" } },
-                [_c("BarChart2", { attrs: { dataList: _vm.dataList } })],
-                1
+                "v-tabs",
+                {
+                  attrs: {
+                    grow: "",
+                    "background-color": "deep-purple accent-4",
+                    "center-active": "",
+                    dark: ""
+                  },
+                  model: {
+                    value: _vm.tab,
+                    callback: function($$v) {
+                      _vm.tab = $$v
+                    },
+                    expression: "tab"
+                  }
+                },
+                [
+                  _vm._l(_vm.dataDay, function(data, index) {
+                    return _c(
+                      "v-tab",
+                      {
+                        key: index,
+                        on: {
+                          change: function($event) {
+                            return _vm.getDaily(data)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                                  " +
+                            _vm._s(data.name) +
+                            "\n                                "
+                        )
+                      ]
+                    )
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "v-tab-item",
+                    {
+                      model: {
+                        value: _vm.tab,
+                        callback: function($$v) {
+                          _vm.tab = $$v
+                        },
+                        expression: "tab"
+                      }
+                    },
+                    [
+                      _c(
+                        "v-row",
+                        { attrs: { justify: "center" } },
+                        [
+                          _c(
+                            "v-col",
+                            {
+                              attrs: {
+                                xs12: "",
+                                sm12: "",
+                                md: "6",
+                                lg: "6",
+                                "pa-2": ""
+                              }
+                            },
+                            [
+                              _c(
+                                "v-card",
+                                { staticClass: "elevation-8" },
+                                [
+                                  _c(
+                                    "v-card-text",
+                                    [
+                                      _vm._v(
+                                        "\n\t\t\t\t\t\t\t\t\t\t\t\t\tDaily\n\t\t\t\t\t\t\t\t\t\t\t\t"
+                                      ),
+                                      _c("BarChart3", {
+                                        attrs: { dataMachine: _vm.dataMachine }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-col",
+                            {
+                              attrs: {
+                                xs12: "",
+                                sm12: "",
+                                md: "6",
+                                lg: "6",
+                                "pa-2": ""
+                              }
+                            },
+                            [
+                              _c(
+                                "v-card",
+                                { staticClass: "elevation-8" },
+                                [
+                                  _c(
+                                    "v-card-text",
+                                    [
+                                      _vm._v(
+                                        "\n\t\t\t\t\t\t\t\t\t\t\t\t\tWeekly\n\t\t\t\t\t\t\t\t\t\t\t\t"
+                                      ),
+                                      _c("BarChart2", {
+                                        attrs: {
+                                          dataMachineWeekly:
+                                            _vm.dataMachineWeekly
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-row",
+                        { attrs: { justify: "center" } },
+                        [
+                          _c(
+                            "v-col",
+                            {
+                              attrs: {
+                                xs12: "",
+                                sm12: "",
+                                md: "6",
+                                lg: "6",
+                                "pa-2": ""
+                              }
+                            },
+                            [
+                              _c(
+                                "v-card",
+                                { staticClass: "elevation-8" },
+                                [
+                                  _c(
+                                    "v-card-text",
+                                    [
+                                      _vm._v(
+                                        "\n\t\t\t\t\t\t\t\t\t\t\t\t\tMonthly\n\t\t\t\t\t\t\t\t\t\t\t\t"
+                                      ),
+                                      _c("BarChart", {
+                                        attrs: {
+                                          dataMachineMonthly:
+                                            _vm.dataMachineMonthly
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-col",
+                            {
+                              attrs: {
+                                xs12: "",
+                                sm12: "",
+                                md: "6",
+                                lg: "6",
+                                "pa-2": ""
+                              }
+                            },
+                            [
+                              _c(
+                                "v-card",
+                                {
+                                  staticClass: "elevation-8",
+                                  attrs: { height: "430" }
+                                },
+                                [
+                                  _c(
+                                    "v-card-title",
+                                    [
+                                      _c(
+                                        "v-flex",
+                                        [
+                                          _c(
+                                            "v-icon",
+                                            { attrs: { size: "200" } },
+                                            [_vm._v("signal_cellular_alt")]
+                                          )
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-flex",
+                                        { staticClass: "text-xs-right" },
+                                        [
+                                          _c(
+                                            "h3",
+                                            { staticClass: "display-2 " },
+                                            [
+                                              _vm._v("98 %"),
+                                              _c("small", {
+                                                staticClass: "body-1"
+                                              })
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("h6", { staticClass: "caption " })
+                                        ]
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c("v-card-actions", [
+                                    _c("div", { staticClass: "body-1" }, [
+                                      _vm._v(" Efficiency")
+                                    ])
+                                  ])
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                2
               )
             ],
             1
@@ -58896,139 +59581,184 @@ var render = function() {
         [
           _c(
             "v-flex",
-            { attrs: { xs12: "", sm6: "", md4: "", lg3: "", "pa-2": "" } },
+            { attrs: { xs12: "", sm12: "", md12: "", lg12: "", "pa-2": "" } },
             [
               _c(
-                "v-card",
-                {
-                  staticClass: "elevation-8",
-                  attrs: { color: "purple darken-4", dark: "" }
-                },
+                "v-row",
+                { attrs: { justify: "center" } },
                 [
                   _c(
-                    "v-card-title",
+                    "v-col",
+                    {
+                      attrs: {
+                        xs12: "",
+                        sm12: "",
+                        md: "6",
+                        lg: "6",
+                        "pa-2": ""
+                      }
+                    },
                     [
                       _c(
-                        "v-flex",
-                        { attrs: { xs6: "" } },
+                        "v-card",
+                        { staticClass: "elevation-8" },
                         [
-                          _c("v-icon", { attrs: { size: "72" } }, [
-                            _vm._v("fastfood")
-                          ])
+                          _c(
+                            "v-card-text",
+                            [
+                              _vm._v(
+                                "\n\t\t\t\t\t\t\t\t\t\t\t\t\tDaily\n\t\t\t\t\t\t\t\t\t\t\t\t"
+                              ),
+                              _c("BarChart3", {
+                                attrs: { dataMachine: _vm.dataMachine }
+                              })
+                            ],
+                            1
+                          )
                         ],
                         1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { staticClass: "text-xs-right", attrs: { xs6: "" } },
-                        [
-                          _c("h3", { staticClass: "display-2 " }, [
-                            _vm._v(_vm._s(_vm.dataList.daily) + " "),
-                            _c("small", { staticClass: "body-1" })
-                          ]),
-                          _vm._v(" "),
-                          _c("h6", { staticClass: "caption " })
-                        ]
                       )
                     ],
                     1
                   ),
                   _vm._v(" "),
-                  _c("v-card-actions", [
-                    _c("div", { staticClass: "body-1" }, [
-                      _vm._v(" Daily Task")
-                    ])
-                  ])
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-flex",
-            { attrs: { xs12: "", sm6: "", md4: "", lg3: "", "pa-2": "" } },
-            [
-              _c(
-                "v-card",
-                {
-                  staticClass: "elevation-8",
-                  attrs: { color: "deep-purple  darken-4", dark: "" }
-                },
-                [
                   _c(
-                    "v-card-title",
+                    "v-col",
+                    {
+                      attrs: {
+                        xs12: "",
+                        sm12: "",
+                        md: "6",
+                        lg: "6",
+                        "pa-2": ""
+                      }
+                    },
                     [
                       _c(
-                        "v-flex",
-                        { attrs: { xs6: "" } },
+                        "v-card",
+                        { staticClass: "elevation-8" },
                         [
-                          _c("v-icon", { attrs: { size: "72" } }, [
-                            _vm._v("attach_money")
-                          ])
+                          _c(
+                            "v-card-text",
+                            [
+                              _vm._v(
+                                "\n\t\t\t\t\t\t\t\t\t\t\t\t\tWeekly\n\t\t\t\t\t\t\t\t\t\t\t\t"
+                              ),
+                              _c("BarChart2", {
+                                attrs: {
+                                  dataMachineWeekly: _vm.dataMachineWeekly
+                                }
+                              })
+                            ],
+                            1
+                          )
                         ],
                         1
-                      ),
-                      _vm._v(" "),
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-row",
+                { attrs: { justify: "center" } },
+                [
+                  _c(
+                    "v-col",
+                    {
+                      attrs: {
+                        xs12: "",
+                        sm12: "",
+                        md: "6",
+                        lg: "6",
+                        "pa-2": ""
+                      }
+                    },
+                    [
                       _c(
-                        "v-flex",
-                        { staticClass: "text-xs-right", attrs: { xs6: "" } },
+                        "v-card",
+                        { staticClass: "elevation-8" },
                         [
-                          _c("h3", { staticClass: "display-2 " }, [
-                            _vm._v(_vm._s(_vm.dataList.week) + " "),
-                            _c("small", { staticClass: "body-1" })
-                          ]),
-                          _vm._v(" "),
-                          _c("h6", { staticClass: "caption " })
-                        ]
+                          _c(
+                            "v-card-text",
+                            [
+                              _vm._v(
+                                "\n\t\t\t\t\t\t\t\t\t\t\t\t\tMonthly\n\t\t\t\t\t\t\t\t\t\t\t\t"
+                              ),
+                              _c("BarChart", {
+                                attrs: {
+                                  dataMachineMonthly: _vm.dataMachineMonthly
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
                       )
                     ],
                     1
                   ),
                   _vm._v(" "),
-                  _c("v-card-actions", [
-                    _c("div", { staticClass: "body-1" }, [
-                      _vm._v(" Weekly Task")
-                    ])
-                  ])
+                  _c(
+                    "v-col",
+                    {
+                      attrs: {
+                        xs12: "",
+                        sm12: "",
+                        md: "6",
+                        lg: "6",
+                        "pa-2": ""
+                      }
+                    },
+                    [
+                      _c(
+                        "v-card",
+                        {
+                          staticClass: "elevation-8",
+                          attrs: { height: "430" }
+                        },
+                        [
+                          _c(
+                            "v-card-title",
+                            [
+                              _c(
+                                "v-flex",
+                                [
+                                  _c("v-icon", { attrs: { size: "200" } }, [
+                                    _vm._v("signal_cellular_alt")
+                                  ])
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c("v-flex", { staticClass: "text-xs-right" }, [
+                                _c("h3", { staticClass: "display-2 " }, [
+                                  _vm._v("98 %"),
+                                  _c("small", { staticClass: "body-1" })
+                                ]),
+                                _vm._v(" "),
+                                _c("h6", { staticClass: "caption " })
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("v-card-actions", [
+                            _c("div", { staticClass: "body-1" }, [
+                              _vm._v(" Efficiency")
+                            ])
+                          ])
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
                 ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-row",
-        { attrs: { justify: "center" } },
-        [
-          _c(
-            "v-flex",
-            { attrs: { xs12: "", sm12: "", md6: "", lg6: "", "pa-2": "" } },
-            [
-              _c(
-                "v-card",
-                { staticClass: "elevation-8", attrs: { flat: "" } },
-                [_c("BarChart", { attrs: { dataList: _vm.dataList } })],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-flex",
-            { attrs: { xs12: "", sm12: "", md6: "", lg6: "", "pa-2": "" } },
-            [
-              _c(
-                "v-card",
-                { staticClass: "elevation-8", attrs: { flat: "" } },
-                [_c("BarChart2", { attrs: { dataList: _vm.dataList } })],
                 1
               )
             ],
@@ -59132,27 +59862,256 @@ var render = function() {
         [
           _c(
             "v-flex",
-            { attrs: { xs12: "", sm12: "", md6: "", lg6: "", "pa-2": "" } },
+            { attrs: { xs12: "", sm12: "", md12: "", lg12: "", "pa-2": "" } },
             [
               _c(
-                "v-card",
-                { staticClass: "elevation-8", attrs: { flat: "" } },
-                [_c("BarChart", { attrs: { dataList: _vm.dataList } })],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-flex",
-            { attrs: { xs12: "", sm12: "", md6: "", lg6: "", "pa-2": "" } },
-            [
-              _c(
-                "v-card",
-                { staticClass: "elevation-8", attrs: { flat: "" } },
-                [_c("BarChart2", { attrs: { dataList: _vm.dataList } })],
-                1
+                "v-tabs",
+                {
+                  attrs: {
+                    grow: "",
+                    "background-color": "deep-purple accent-4",
+                    "center-active": "",
+                    dark: ""
+                  },
+                  model: {
+                    value: _vm.tab,
+                    callback: function($$v) {
+                      _vm.tab = $$v
+                    },
+                    expression: "tab"
+                  }
+                },
+                [
+                  _vm._l(_vm.dataDay, function(data, index) {
+                    return _c(
+                      "v-tab",
+                      {
+                        key: index,
+                        on: {
+                          change: function($event) {
+                            return _vm.getDaily(data)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                                  " +
+                            _vm._s(data.name) +
+                            "\n                                "
+                        )
+                      ]
+                    )
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "v-tab-item",
+                    {
+                      model: {
+                        value: _vm.tab,
+                        callback: function($$v) {
+                          _vm.tab = $$v
+                        },
+                        expression: "tab"
+                      }
+                    },
+                    [
+                      _c(
+                        "v-row",
+                        { attrs: { justify: "center" } },
+                        [
+                          _c(
+                            "v-col",
+                            {
+                              attrs: {
+                                xs12: "",
+                                sm12: "",
+                                md: "6",
+                                lg: "6",
+                                "pa-2": ""
+                              }
+                            },
+                            [
+                              _c(
+                                "v-card",
+                                { staticClass: "elevation-8" },
+                                [
+                                  _c(
+                                    "v-card-text",
+                                    [
+                                      _vm._v(
+                                        "\n\t\t\t\t\t\t\t\t\t\t\t\t\tDaily\n\t\t\t\t\t\t\t\t\t\t\t\t"
+                                      ),
+                                      _c("BarChart3", {
+                                        attrs: { dataMachine: _vm.dataMachine }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-col",
+                            {
+                              attrs: {
+                                xs12: "",
+                                sm12: "",
+                                md: "6",
+                                lg: "6",
+                                "pa-2": ""
+                              }
+                            },
+                            [
+                              _c(
+                                "v-card",
+                                { staticClass: "elevation-8" },
+                                [
+                                  _c(
+                                    "v-card-text",
+                                    [
+                                      _vm._v(
+                                        "\n\t\t\t\t\t\t\t\t\t\t\t\t\tWeekly\n\t\t\t\t\t\t\t\t\t\t\t\t"
+                                      ),
+                                      _c("BarChart2", {
+                                        attrs: {
+                                          dataMachineWeekly:
+                                            _vm.dataMachineWeekly
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-row",
+                        { attrs: { justify: "center" } },
+                        [
+                          _c(
+                            "v-col",
+                            {
+                              attrs: {
+                                xs12: "",
+                                sm12: "",
+                                md: "6",
+                                lg: "6",
+                                "pa-2": ""
+                              }
+                            },
+                            [
+                              _c(
+                                "v-card",
+                                { staticClass: "elevation-8" },
+                                [
+                                  _c(
+                                    "v-card-text",
+                                    [
+                                      _vm._v(
+                                        "\n\t\t\t\t\t\t\t\t\t\t\t\t\tMonthly\n\t\t\t\t\t\t\t\t\t\t\t\t"
+                                      ),
+                                      _c("BarChart", {
+                                        attrs: {
+                                          dataMachineMonthly:
+                                            _vm.dataMachineMonthly
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-col",
+                            {
+                              attrs: {
+                                xs12: "",
+                                sm12: "",
+                                md: "6",
+                                lg: "6",
+                                "pa-2": ""
+                              }
+                            },
+                            [
+                              _c(
+                                "v-card",
+                                {
+                                  staticClass: "elevation-8",
+                                  attrs: { height: "430" }
+                                },
+                                [
+                                  _c(
+                                    "v-card-title",
+                                    [
+                                      _c(
+                                        "v-flex",
+                                        [
+                                          _c(
+                                            "v-icon",
+                                            { attrs: { size: "200" } },
+                                            [_vm._v("signal_cellular_alt")]
+                                          )
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-flex",
+                                        { staticClass: "text-xs-right" },
+                                        [
+                                          _c(
+                                            "h3",
+                                            { staticClass: "display-2 " },
+                                            [
+                                              _vm._v("98 %"),
+                                              _c("small", {
+                                                staticClass: "body-1"
+                                              })
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("h6", { staticClass: "caption " })
+                                        ]
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c("v-card-actions", [
+                                    _c("div", { staticClass: "body-1" }, [
+                                      _vm._v(" Efficiency")
+                                    ])
+                                  ])
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                2
               )
             ],
             1
@@ -59833,11 +60792,15 @@ var render = function() {
             : _vm._e(),
           _vm._v(" "),
           _vm.user_type_id == 2
-            ? _c("SubAdminOverView", { attrs: { dataList: _vm.dataList } })
+            ? _c("SubAdminOverView", {
+                attrs: { dataList: _vm.dataList, dataDay: _vm.dataDay }
+              })
             : _vm._e(),
           _vm._v(" "),
           _vm.user_type_id == 3
-            ? _c("MachineOverView", { attrs: { dataList: _vm.dataList } })
+            ? _c("MachineOverView", {
+                attrs: { dataList: _vm.dataList, dataDay: _vm.dataDay }
+              })
             : _vm._e()
         ],
         1
@@ -69368,6 +70331,56 @@ component.options.__file = "resources/js/components/dashboard/common/BarChart2.v
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BarChart2_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./BarChart2.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/common/BarChart2.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BarChart2_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard/common/BarChart3.vue":
+/*!****************************************************************!*\
+  !*** ./resources/js/components/dashboard/common/BarChart3.vue ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _BarChart3_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BarChart3.vue?vue&type=script&lang=js& */ "./resources/js/components/dashboard/common/BarChart3.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+var render, staticRenderFns
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  _BarChart3_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"],
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/dashboard/common/BarChart3.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard/common/BarChart3.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/common/BarChart3.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BarChart3_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./BarChart3.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/common/BarChart3.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BarChart3_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 

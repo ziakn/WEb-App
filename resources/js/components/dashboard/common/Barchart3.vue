@@ -5,7 +5,7 @@ export default {
   extends: Bar,
    props:
       {
-             dataMachineMonthly:Array
+             dataMachine:Array
              
       },
   data() {
@@ -22,9 +22,9 @@ export default {
     };
   },
    watch: {
-    dataMachineMonthly() {
+    dataMachine() {
 
-      this.myData=this.dataMachineMonthly;
+      this.myData=this.dataMachine;
       if(this.myData)
           {
           for(let p of this.myData)
@@ -39,7 +39,7 @@ export default {
         labels:  this.start_date,
         datasets: [
           {
-            label: "Last 365 Days " ,
+            label: "Last 30 Days" ,
             borderColor: "#05CBE1",
             pointBackgroundColor: "white",
             pointBorderColor: "white",
@@ -62,9 +62,9 @@ export default {
       .getContext("2d")
       .createLinearGradient(0, 0, 0, 450);
 
-    this.gradient.addColorStop(0, "rgba(25, 0, 89, 0.5)");
-    this.gradient.addColorStop(0.5, "rgba(155, 0, 10, 0.25)");
-    this.gradient.addColorStop(1, "rgba(55, 0, 96, 0)");
+    this.gradient.addColorStop(0, "rgba(255, 0,0, 0.5)");
+    this.gradient.addColorStop(0.5, "rgba(255, 0, 0, 0.25)");
+    this.gradient.addColorStop(1, "rgba(255, 0, 0, 0)");
 
     this.gradient2.addColorStop(0, "rgba(0, 231, 255, 0.9)");
     this.gradient2.addColorStop(0.5, "rgba(0, 231, 255, 0.25)");

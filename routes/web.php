@@ -56,9 +56,19 @@ Route::get('/app/getusertype/{id}','Dashboard\PagesController@getuserType');
 
 
 Route::get('/app/superadmindashboardoverview','Dashboard\DashboardController@getSuperAdminMachine');
+Route::get('/app/superadmingetmachinedaily/{id}','Dashboard\DashboardController@getSuperAdminMachineDataDaily');
+Route::get('/app/superadmingetmachineweekly/{id}','Dashboard\DashboardController@getSuperAdminMachineDataWeekly');
+Route::get('/app/superadmingetmachinemonthly/{id}','Dashboard\DashboardController@getSuperAdminMachineDataMonthly');
 
 
+Route::get('/app/subadmindashboardoverview','Dashboard\DashboardController@getsubAdminMachine');
+Route::get('/app/subadmingetmachinedaily/{id}','Dashboard\DashboardController@getSubAdminMachineDataDaily');
+Route::get('/app/subadmingetmachineweekly/{id}','Dashboard\DashboardController@getSubAdminMachineDataWeekly');
+Route::get('/app/subadmingetmachinemonthly/{id}','Dashboard\DashboardController@getSubAdminMachineDataMonthly');
 
+Route::get('/app/machineadmingetmachinedaily/{id}','Dashboard\DashboardController@getMachineAdminMachineDataDaily');
+Route::get('/app/machineadmingetmachineweekly/{id}','Dashboard\DashboardController@getMachineAdminMachineDataWeekly');
+Route::get('/app/machineadmingetmachinemonthly/{id}','Dashboard\DashboardController@getMachineAdminMachineDataMonthly');
 
 
 
