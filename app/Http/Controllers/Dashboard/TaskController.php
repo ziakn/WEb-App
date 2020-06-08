@@ -57,7 +57,12 @@ class TaskController extends Controller
     {
 
         // dd($request->name);
-        $auth_id=Auth::id();
+        $auth_id=Auth::user();
+        if($auth_id->userType == 1)
+        {
+            $admin = AdminMachine::where('machine_id', $request->machine_id)->first();
+            $auth_id->id = $admin->admin_id;
+        }
         $response=array();
         $response['status']=false;
         $response['data'] ='';
@@ -65,7 +70,7 @@ class TaskController extends Controller
         try {
         $create=Task::create(
             [
-                'admin_id' => $auth_id,
+                'admin_id' => $auth_id->id,
                 'machine_id'=> $request->machine_id,
                 'name'=> $request->name,
                 'make'=> $request->make,

@@ -19,14 +19,8 @@ class DocumentController extends Controller
     {
         // $auth_id=Auth::id();
         $id = Auth::User();
-        if($id->userType==2)
-        {
-            $data=Document::where('admin_id',$id->id);
-        }
-        else
-        {
-            $data=Document::orderBy('id','DESC');
-        }
+        
+        $data=Document::orderBy('id','DESC');
        
         if(isset($request->show) && !empty($request->show))
         {

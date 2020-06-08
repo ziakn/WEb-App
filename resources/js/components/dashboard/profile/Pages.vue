@@ -32,7 +32,7 @@
                         </tr>
                         <tr>
                         <td>scan_or_document </td>
-                        <td> <v-checkbox v-model="editedItem.scan_or_document"  v-if="dataType.userType != 3"></v-checkbox></td>
+                        <td> <v-checkbox v-model="editedItem.scan_or_document"  ></v-checkbox></td>
                         </tr>
                         <tr>
                         <td>setting</td>

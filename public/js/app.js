@@ -60970,23 +60970,20 @@ var render = function() {
                                 _c(
                                   "td",
                                   [
-                                    _vm.dataType.userType != 3
-                                      ? _c("v-checkbox", {
-                                          model: {
-                                            value:
-                                              _vm.editedItem.scan_or_document,
-                                            callback: function($$v) {
-                                              _vm.$set(
-                                                _vm.editedItem,
-                                                "scan_or_document",
-                                                $$v
-                                              )
-                                            },
-                                            expression:
-                                              "editedItem.scan_or_document"
-                                          }
-                                        })
-                                      : _vm._e()
+                                    _c("v-checkbox", {
+                                      model: {
+                                        value: _vm.editedItem.scan_or_document,
+                                        callback: function($$v) {
+                                          _vm.$set(
+                                            _vm.editedItem,
+                                            "scan_or_document",
+                                            $$v
+                                          )
+                                        },
+                                        expression:
+                                          "editedItem.scan_or_document"
+                                      }
+                                    })
                                   ],
                                   1
                                 )
