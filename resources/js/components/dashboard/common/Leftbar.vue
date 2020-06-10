@@ -3,8 +3,8 @@
     <v-navigation-drawer
       v-model="trigger"
       :clipped="$vuetify.breakpoint.lgAndUp"
-      color="accent"
-      dark
+     
+      class="elevation-2"
       app
     >
       <v-list shaped dense>
@@ -24,7 +24,7 @@
             :prepend-icon="item.model ? item.icon : item['icon-alt']"
             append-icon
             v-show="handleGoToMenus(item)"
-            active-class="black white--text"
+            active-class="red lighten-3"
           >
             <template v-slot:activator>
               <v-list-item  >
@@ -38,7 +38,6 @@
               :key="i"
               :to="handleGoToMenu('/dashboard/'+child.link)"
                  v-show="showChild(child)"
-              active-class="deep-purple white--text"
             >
             <v-flex>
               <v-list-item-action v-if="child.icon">
@@ -62,7 +61,7 @@
       </v-list>
       <template v-slot:append>
         <div class="pa-2">
-          <v-btn block href="/logoutuser">Logout</v-btn>
+          <v-btn color="primary" block href="/logoutuser">Logout</v-btn>
         </div>
       </template>
     </v-navigation-drawer>

@@ -2,7 +2,7 @@
  <div>
      <v-row justify="center" >
 						<v-flex xs12 sm6 md6 lg6 pa-2>
-						<v-card class="elevation-8" color="purple darken-4" dark>
+						<v-card class="elevation-8" color="purple darken-1" dark>
 							<v-card-title>
 							<v-flex xs6>
 								<v-icon  size="72">fastfood</v-icon>
@@ -18,7 +18,7 @@
 						</v-card>
 					</v-flex>
 					<v-flex xs12 sm6 md6 lg6 pa-2>
-						<v-card class="elevation-8" color="deep-purple  darken-4" dark>
+						<v-card class="elevation-8" color="deep-purple  darken-2" dark>
 							<v-card-title>
 							<v-flex xs6>
 								<v-icon size="72">account_tree</v-icon>

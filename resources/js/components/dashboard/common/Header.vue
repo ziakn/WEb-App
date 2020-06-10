@@ -1,7 +1,7 @@
 <template>
-  <v-app-bar  color="accent" :clipped-left="$vuetify.breakpoint.lgAndUp" app dark flat >
-    <v-toolbar-title style="width: 300px" class="ml-0 pl-4">
-      <v-app-bar-nav-icon @click="drawerTrigger"></v-app-bar-nav-icon>
+  <v-app-bar :clipped-left="$vuetify.breakpoint.lgAndUp" app  >
+    <v-toolbar-title style="width: 300px;" class="ml-0 pl-4" >
+      <v-app-bar-nav-icon @click="drawerTrigger" ></v-app-bar-nav-icon>
       <span class="hidden-sm-and-down">Mushin Web App</span>
     </v-toolbar-title>
     <v-progress-linear
@@ -9,7 +9,7 @@
       :indeterminate="showFullLoading"
       absolute
       bottom
-      color="accent"
+      color="white"
     ></v-progress-linear>
     <!-- <v-text-field
       flat
